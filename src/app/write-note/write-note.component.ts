@@ -4,6 +4,8 @@ import {NoteRequest} from '../model/note-request/note-request';
 import {ActivatedRoute} from '@angular/router';
 import {NoteService} from '../model/note-service/note.service';
 import {MatDialog} from '@angular/material';
+import {ResultDialogComponent} from '../result-dialog/result-dialog.component';
+import {EncryptionCredentials} from '../model/encryption-credentials/encryption-credentials';
 
 @Component({
   selector: 'app-write-note',
@@ -26,8 +28,7 @@ export class WriteNoteComponent implements OnInit {
   private createdNoteRequest: NoteRequest;
 
   private receivedEncryptedNote: Note;
-  private receivedNoteId: string;
-  private receivedNoteKey: string;
+  private receivedEncryptionCredentials: EncryptionCredentials;
 
   constructor(private route: ActivatedRoute, private noteService: NoteService, private dialog: MatDialog) { }
 
@@ -42,7 +43,9 @@ export class WriteNoteComponent implements OnInit {
       this.createNoteRequest();
 
       this.noteSaveRequestPromise().then(data => {
-        this.processIdKeyPair(data);
+        this.receivedEncryptionCredentials = new EncryptionCredentials(data);
+
+        this.showEncryptionResult();
 
         this.getEncryptedNote();
 
@@ -67,25 +70,12 @@ export class WriteNoteComponent implements OnInit {
     this.createdNoteRequest = new NoteRequest(this.createdNote, this.method);
   }
 
-  public processIdKeyPair(data: string) {
-    this.assignId(data);
-    this.assignKey(data);
-  }
-
-  public assignId(data: string) {
-    this.receivedNoteId = data.split('/')[0];
-  }
-
-  public assignKey(data: string) {
-    this.receivedNoteKey = data.split('/')[1];
-  }
-
   public noteSaveRequestPromise() {
     return this.noteService.save(this.createdNoteRequest).toPromise();
   }
 
   public getEncryptedNote() {
-    return this.noteService.find(this.receivedNoteId).subscribe(data => {
+    return this.noteService.find(this.receivedEncryptionCredentials.getId()).subscribe(data => {
         this.receivedEncryptedNote = data;
       },
       error => {
@@ -112,6 +102,12 @@ export class WriteNoteComponent implements OnInit {
 
   public errorAcknowledged() {
     this.errorOccured = false;
+    if ( this.receivedEncryptionCredentials == null ) {
+      this.encryptTextarea();
+    }
+    if ( this.receivedEncryptedNote == null ) {
+      this.getEncryptedNote();
+    }
   }
 
   public isInputEmpty() {
@@ -120,5 +116,9 @@ export class WriteNoteComponent implements OnInit {
 
   public finishedWriting() {
     return this.receivedEncryptedNote != null;
+  }
+
+  private showEncryptionResult() {
+    this.dialog.open(ResultDialogComponent, { width: '900px', height: '130px', data: this.receivedEncryptionCredentials });
   }
 }
