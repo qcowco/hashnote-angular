@@ -3,6 +3,7 @@ import {Note} from '../model/note/note';
 import {ActivatedRoute} from '@angular/router';
 import {NoteService} from '../model/note-service/note.service';
 import {MatDialog} from '@angular/material';
+import {KeyDialogComponent} from '../key-dialog/key-dialog.component';
 
 @Component({
   selector: 'app-view-note',
@@ -66,19 +67,24 @@ export class ViewNoteComponent implements OnInit {
 
   public tryDecryptNote() {
     if (this.key == null) {
-      // this.decryptWithDialog(); todo key dialog
+      this.decryptWithDialog();
     } else {
       this.getDecryptedNote();
     }
   }
 
-  // public decryptWithDialog() {
-  //   this.openKeyDialog()
-  // }
-  //
-  // public openKeyDialog() {
-  //   return this.dialog.open()
-  // }
+  public decryptWithDialog() {
+    this.openKeyDialog().then(data => {
+      if(data != null) {
+        this.key = data;
+        this.getDecryptedNote();
+      }
+    });
+  }
+
+  public openKeyDialog() {
+    return this.dialog.open(KeyDialogComponent, { width: '900px', height: '150px' }).afterClosed().toPromise();
+  }
 
   public getDecryptedNote() {
     this.isDecrypting = true;

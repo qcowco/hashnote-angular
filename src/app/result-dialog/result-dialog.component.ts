@@ -13,13 +13,11 @@ export class ResultDialogComponent implements OnInit {
   private url: string;
 
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) public encryptionCredentials: EncryptionCredentials) {
-    this.applyCredentials();
-    this.setUrl();
   }
 
   ngOnInit() {
-    this.id = 'przykladowe id';
-    this.key = 'przykladowy klucz';
+    this.applyCredentials();
+    this.setUrl();
   }
 
   private applyCredentials() {
