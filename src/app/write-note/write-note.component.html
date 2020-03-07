@@ -1,0 +1,23 @@
+<textarea class="note-textarea" spellcheck="false" [disabled]="finishedWriting() || errorOccured"
+          placeholder="{{placeholderMessage}}" [value]="createdNote.message"
+          [(ngModel)]="errorOccured?errorMessage:textareaInput"></textarea>
+<div id="circle-key" [ngStyle]="{'background-color': errorOccured?'darkred':'goldenrod'}">
+  <!--  main panel  -->
+  <button mat-icon-button *ngIf="errorOccured" (click)="errorAcknowledged()">
+    <i class="fa fa-times"></i>
+  </button>
+  <button mat-icon-button *ngIf="!errorOccured && !finishedWriting()" (click)="encryptTextarea()"
+          [disabled]="isInputEmpty() || processing">
+    <i class="fa fa-unlock-alt"></i>
+  </button>
+  <button mat-icon-button *ngIf="!errorOccured && finishedWriting()" (click)="showEncryptionResult()">
+    <i class="fa fa-lock"></i>
+  </button>
+
+  <!--  subpanel  -->
+  <div id="circle-cog">
+    <button mat-icon-button [disabled]="finishedWriting()" (click)="openOptions()">
+      <i class="fa fa-cogs"></i>
+    </button>
+  </div>
+</div>
