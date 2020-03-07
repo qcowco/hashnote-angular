@@ -57,7 +57,7 @@ export class WriteNoteComponent implements OnInit {
     this.createNoteFromTextarea();
     this.createNoteRequest();
 
-    this.noteSaveRequestPromise().then(data => {
+    this.noteService.save(this.createdNoteRequest).subscribe(data => {
         this.receivedEncryptionCredentials = new EncryptionCredentials(data);
 
         this.showEncryptionResult();
@@ -78,10 +78,6 @@ export class WriteNoteComponent implements OnInit {
 
   public createNoteRequest() {
     this.createdNoteRequest = new NoteRequest(this.createdNote, this.method);
-  }
-
-  public noteSaveRequestPromise() { // todo usunac
-    return this.noteService.save(this.createdNoteRequest).toPromise();
   }
 
   public getEncryptedNote() {
