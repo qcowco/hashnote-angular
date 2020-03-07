@@ -1,7 +1,7 @@
 export class Note {
-  private id: string;
-  private name: string;
-  private message: string;
+  public id: string;
+  public name: string;
+  public message: string;
 
   constructor(name: string, message: string) {
     this.name = name;
