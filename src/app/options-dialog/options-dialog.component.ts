@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA} from '@angular/material/';
 
 @Component({
   selector: 'app-options-dialog',
@@ -7,21 +8,24 @@ import {MatDialogRef} from '@angular/material';
   styleUrls: ['./options-dialog.component.css']
 })
 export class OptionsDialogComponent implements OnInit {
+  private name: string;
   private selection: string;
   private methods: string[];
   // todo methods from rest api
 
-  constructor(public dialog: MatDialogRef<OptionsDialogComponent>) {
+  constructor(public dialog: MatDialogRef<OptionsDialogComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public defaultValues) {
+    this.name = defaultValues.name;
+    this.selection = defaultValues.method;
+  }
+
+  ngOnInit() {
     this.methods = [
       'AES'
     ];
   }
 
-  ngOnInit() {
-  }
-
   public confirmSelection() {
-    this.dialog.close(this.selection);
+    this.dialog.close({ name: this.name, method: this.selection });
   }
 
 }

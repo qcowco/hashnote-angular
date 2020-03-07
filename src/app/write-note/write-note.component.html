@@ -7,7 +7,7 @@
     <i class="fa fa-times"></i>
   </button>
   <button mat-icon-button *ngIf="!errorOccured && !finishedWriting()" (click)="encryptTextarea()"
-          [disabled]="isInputEmpty() || processing">
+          [disabled]="isInputEmpty() || isEncrypting">
     <i class="fa fa-unlock-alt"></i>
   </button>
   <button mat-icon-button *ngIf="!errorOccured && finishedWriting()" (click)="showEncryptionResult()">
