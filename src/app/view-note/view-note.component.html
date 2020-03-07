@@ -1,0 +1,21 @@
+<textarea class="note-textarea" disabled placeholder="{{placeholderMessage}}" [value]="tryGetMessage()"></textarea>
+<div id="circle-key" [ngStyle]="{'background-color': errorOccured?'darkred':'goldenrod'}">
+  <!--  main panel  -->
+  <button mat-icon-button *ngIf="errorOccured" (click)="errorAcknowledged()">
+    <i class="fa fa-times"></i>
+  </button>
+  <button mat-icon-button *ngIf="!errorOccured && isNoteDecrypted()" (click)="hideContent()">
+    <i class="fa fa-unlock-alt"></i>
+  </button>
+  <button mat-icon-button *ngIf="!errorOccured && !isNoteDecrypted()" (click)="tryDecryptNote()"
+          [disabled]="isDecrypting">
+    <i class="fa fa-lock"></i>
+  </button>
+
+  <!--  SUBPANEL  -->
+  <div id="circle-cog">
+    <button disabled mat-icon-button>
+      <i class="fa fa-cogs"></i>
+    </button>
+  </div>
+</div>
