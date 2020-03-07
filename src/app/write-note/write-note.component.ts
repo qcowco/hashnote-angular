@@ -6,6 +6,7 @@ import {NoteService} from '../model/note-service/note.service';
 import {MatDialog} from '@angular/material';
 import {ResultDialogComponent} from '../result-dialog/result-dialog.component';
 import {EncryptionCredentials} from '../model/encryption-credentials/encryption-credentials';
+import {OptionsDialogComponent} from '../options-dialog/options-dialog.component';
 
 @Component({
   selector: 'app-write-note',
@@ -124,4 +125,12 @@ export class WriteNoteComponent implements OnInit {
     }
   }
 
+  openOptions() {
+    const dialogRef = this.dialog.open(OptionsDialogComponent, { width: '300px', height: '250px' });
+    dialogRef.afterClosed().subscribe( data => {
+      if (data != null) {
+        this.method = data;
+      }
+    });
+  }
 }
