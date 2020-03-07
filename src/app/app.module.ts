@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import { OptionsDialogComponent } from './options-dialog/options-dialog.component';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
 import {HttpClientModule} from '@angular/common/http';
+import { KeyDialogComponent } from './key-dialog/key-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {HttpClientModule} from '@angular/common/http';
     WriteNoteComponent,
     ViewNoteComponent,
     OptionsDialogComponent,
-    ResultDialogComponent
+    ResultDialogComponent,
+    KeyDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import {HttpClientModule} from '@angular/common/http';
   bootstrap: [AppComponent],
   entryComponents: [
     OptionsDialogComponent,
-    ResultDialogComponent
+    ResultDialogComponent,
+    KeyDialogComponent
   ]
 })
 export class AppModule { }

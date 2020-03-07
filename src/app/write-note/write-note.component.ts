@@ -138,13 +138,22 @@ export class WriteNoteComponent implements OnInit {
     return dialogRef.afterClosed().toPromise();
   }
 
-  private encryptWithDialog() {
+  public encryptWithDialog() {
     this.openOptions().then( data => {
       if (data != null) {
         this.noteName = data.name;
         this.method = data.method;
 
         this.encryptNote();
+      }
+    });
+  }
+
+  public setOptions() {
+    this.openOptions().then(data => {
+      if (data != null) {
+        this.noteName = data.name;
+        this.method = data.method;
       }
     });
   }

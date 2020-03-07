@@ -1,0 +1,17 @@
+<mat-dialog-content>
+  <div class="key-info">
+    <p>Provide a key to decrypt this note:</p>
+  </div>
+  <div class="icon-string-container">
+    <div class="key-icon">
+      <i class="fa fa-key"></i>
+    </div>
+    <div class="key-string">
+      <input id="key-input" [(ngModel)]="key" spellcheck="false">
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="confirm()" color="primary">Confirm</button>
+  <button mat-button (click)="this.dialogRef.close()">Cancel</button>
+</mat-dialog-actions>
