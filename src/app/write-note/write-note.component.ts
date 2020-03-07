@@ -18,7 +18,7 @@ export class WriteNoteComponent implements OnInit {
   private textareaInput: string;
   private errorMessage: string;
 
-  private method: string;
+  private method = 'AES';
   private noteName: string;
 
   private errorOccured = false;
@@ -40,24 +40,9 @@ export class WriteNoteComponent implements OnInit {
 
     if (!this.isTextareaEmpty()) {
       if (this.method != null && this.noteName != null) {
-        this.createNoteFromTextarea();
-        this.createNoteRequest();
-
-        this.noteSaveRequestPromise().then(data => {
-          this.receivedEncryptionCredentials = new EncryptionCredentials(data);
-
-          this.showEncryptionResult();
-
-          this.getEncryptedNote();
-
-          this.isEncrypting = false;
-          },
-          error => {
-          this.handleError(error);
-          this.isEncrypting = false;
-          });
+        this.encryptNote();
       } else {
-        this.openOptions();
+        this.encryptWithDialog();
       }
     }
 
@@ -68,6 +53,25 @@ export class WriteNoteComponent implements OnInit {
     return this.textareaInput == null || this.textareaInput === '';
   }
 
+  public encryptNote() {
+    this.createNoteFromTextarea();
+    this.createNoteRequest();
+
+    this.noteSaveRequestPromise().then(data => {
+        this.receivedEncryptionCredentials = new EncryptionCredentials(data);
+
+        this.showEncryptionResult();
+
+        this.getEncryptedNote();
+
+        this.isEncrypting = false;
+      },
+      error => {
+        this.handleError(error);
+        this.isEncrypting = false;
+      });
+  }
+
   public createNoteFromTextarea() {
     this.createdNote = new Note(this.noteName, this.textareaInput);
   }
@@ -76,7 +80,7 @@ export class WriteNoteComponent implements OnInit {
     this.createdNoteRequest = new NoteRequest(this.createdNote, this.method);
   }
 
-  public noteSaveRequestPromise() {
+  public noteSaveRequestPromise() { // todo usunac
     return this.noteService.save(this.createdNoteRequest).toPromise();
   }
 
@@ -95,7 +99,7 @@ export class WriteNoteComponent implements OnInit {
     } else if (error.status === 0) {
       this.setErrorMessage('Error: Unable to establish a connection with the API server.');
     } else if (error.status === 400) {
-      this.setErrorMessage('Error: Please select an encryption method.');
+      this.setErrorMessage('Error: Missing name OR encryption method.');
     } else {
       this.setErrorMessage('Error: Unknown error.');
     }
@@ -127,16 +131,24 @@ export class WriteNoteComponent implements OnInit {
       return this.errorMessage;
     } else if (this.finishedWriting()) {
       return this.receivedEncryptedNote.message;
+    } else {
+      return this.textareaInput;
     }
   }
 
   public openOptions() {
     const dialogRef = this.dialog.open(OptionsDialogComponent,
       { width: '300px', height: '300px', data: { name: this.noteName, method: this.method} });
-    dialogRef.afterClosed().subscribe( data => {
+    return dialogRef.afterClosed().toPromise();
+  }
+
+  private encryptWithDialog() {
+    this.openOptions().then( data => {
       if (data != null) {
         this.noteName = data.name;
         this.method = data.method;
+
+        this.encryptNote();
       }
     });
   }
