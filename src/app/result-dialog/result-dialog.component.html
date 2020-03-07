@@ -1,0 +1,16 @@
+<mat-dialog-content>
+  <div class="key-info">
+    <p>Your note's credentials:</p>
+  </div>
+  <div class="icon-string-container">
+    <button mat-icon-button class="side-icon-container" (click)="onClickKey()">
+      <i class="fa fa-key"></i>
+    </button>
+    <div class="key-string">
+      <span id="note-id">{{id}}</span>/<span id="note-key">{{key}}</span>
+    </div>
+    <button mat-icon-button class="side-icon-container" (click)="onClickUrl()">
+      <i class="fa fa-external-link"></i>
+    </button>
+  </div>
+</mat-dialog-content>

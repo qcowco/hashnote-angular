@@ -11,6 +11,7 @@ import {MatButtonModule, MatDialogModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import { OptionsDialogComponent } from './options-dialog/options-dialog.component';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,14 @@ import { ResultDialogComponent } from './result-dialog/result-dialog.component';
     BrowserAnimationsModule,
     MatButtonModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    OptionsDialogComponent,
+    ResultDialogComponent
+  ]
 })
 export class AppModule { }

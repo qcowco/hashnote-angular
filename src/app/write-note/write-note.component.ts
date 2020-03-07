@@ -102,12 +102,6 @@ export class WriteNoteComponent implements OnInit {
 
   public errorAcknowledged() {
     this.errorOccured = false;
-    if ( this.receivedEncryptionCredentials == null ) {
-      this.encryptTextarea();
-    }
-    if ( this.receivedEncryptedNote == null ) {
-      this.getEncryptedNote();
-    }
   }
 
   public isInputEmpty() {
@@ -121,4 +115,13 @@ export class WriteNoteComponent implements OnInit {
   private showEncryptionResult() {
     this.dialog.open(ResultDialogComponent, { width: '900px', height: '130px', data: this.receivedEncryptionCredentials });
   }
+
+  public tryGetEncryptedMessage() {
+    if (this.errorOccured) {
+      return this.errorMessage;
+    } else if (this.finishedWriting()) {
+      return this.receivedEncryptedNote.message;
+    }
+  }
+
 }

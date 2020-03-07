@@ -1,6 +1,6 @@
 <textarea class="note-textarea" spellcheck="false" [disabled]="finishedWriting() || errorOccured"
-          placeholder="{{placeholderMessage}}" [value]="createdNote.message"
-          [(ngModel)]="errorOccured?errorMessage:textareaInput"></textarea>
+          placeholder="{{placeholderMessage}}" [value]="tryGetEncryptedMessage()"
+          [(ngModel)]="textareaInput"></textarea>
 <div id="circle-key" [ngStyle]="{'background-color': errorOccured?'darkred':'goldenrod'}">
   <!--  main panel  -->
   <button mat-icon-button *ngIf="errorOccured" (click)="errorAcknowledged()">
@@ -15,9 +15,9 @@
   </button>
 
   <!--  subpanel  -->
-  <div id="circle-cog">
+<!--  <div id="circle-cog">-->
 <!--    <button mat-icon-button [disabled]="finishedWriting()" (click)="openOptions()">-->
 <!--      <i class="fa fa-cogs"></i>-->
 <!--    </button>-->
-  </div>
+<!--  </div>-->
 </div>
