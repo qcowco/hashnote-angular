@@ -83,7 +83,7 @@ export class ViewNoteComponent implements OnInit {
   }
 
   public openKeyDialog() {
-    return this.dialog.open(KeyDialogComponent, { width: '900px', height: '150px' }).afterClosed().toPromise();
+    return this.dialog.open(KeyDialogComponent, { width: '700px', height: '220px' }).afterClosed().toPromise();
   }
 
   public getDecryptedNote() {

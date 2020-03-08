@@ -1,14 +1,13 @@
+<h1 mat-dialog-title>Provide a key to decrypt this note</h1>
 <mat-dialog-content>
-  <div class="key-info">
-    <p>Provide a key to decrypt this note:</p>
-  </div>
   <div class="icon-string-container">
-    <div class="key-icon">
-      <i class="fa fa-key"></i>
-    </div>
-    <div class="key-string">
-      <input id="key-input" [(ngModel)]="key" spellcheck="false">
-    </div>
+    <button disabled mat-icon-button>
+      <i class="fa fa-key" style="color: red;"></i>
+    </button>
+    <mat-form-field>
+      <mat-label>Key</mat-label>
+      <input matInput [(ngModel)]="key">
+    </mat-form-field>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
