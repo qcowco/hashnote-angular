@@ -61,6 +61,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #b7b7b7;
 }
 
+#circle-key > button:disabled {
+  color: #000000;
+}
+
+.fa-lock, .fa-unlock-alt {
+  line-height: 48px !important;
+}
+
+.fa-times {
+  vertical-align: unset !important;
+}
+
 @media (max-width: 768px) {
   #circle-key {
     left: 0;
