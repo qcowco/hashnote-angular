@@ -134,7 +134,7 @@ export class WriteNoteComponent implements OnInit {
 
   public openOptions() {
     const dialogRef = this.dialog.open(OptionsDialogComponent,
-      { width: '300px', height: '225px', data: { name: this.noteName, method: this.method} });
+      { width: '350px', height: '225px', data: { name: this.noteName, method: this.method} });
     return dialogRef.afterClosed().toPromise();
   }
 
