@@ -1,0 +1,84 @@
+.mat-dialog-title {
+  text-align: center;
+}
+
+/*.icon-string-container {*/
+/*  width: 100%;*/
+/*  display: grid;*/
+/*  grid-template-columns: 40px auto 40px;*/
+/*}*/
+
+/*.key-string {*/
+/*  border-left: solid 2px;*/
+/*  border-right: solid 2px;*/
+/*  padding: 0 10px 0 10px;*/
+/*}*/
+
+.mat-dialog-container {
+  overflow: hidden;
+}
+
+.mat-dialog-content {
+  overflow: hidden;
+}
+
+.icon-string-container {
+  background: #e2e2e2;
+  border-radius: 20px;
+  display: inline-flex;
+
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.side-icon-container {
+  float: left;
+  padding: 0 10px 0 10px;
+  text-align: center;
+  width: 5%;
+}
+
+.mat-icon-button {
+  border-radius: initial;
+}
+
+.key-string {
+  float: left;
+  padding: 10px 0px;
+  text-align-last: center;
+  border-left: solid 2px;
+  border-right: solid 2px;
+  width: 90%;
+  overflow: hidden;
+}
+
+#note-key, .fa-key {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .key-string {
+    float: left;
+    padding: initial;
+    border-left: initial;
+    border-right: initial;
+    visibility: hidden;
+    width: 0;
+  }
+
+  .icon-string-container {
+    place-content: center;
+  }
+
+  .side-icon-container {
+    width: 50%;
+    padding: 0 20%;
+    border-radius: initial;
+  }
+
+  .side-icon-container > i {
+    font-size: 35px;
+    padding: 0 10px 0 10px;
+  }
+}

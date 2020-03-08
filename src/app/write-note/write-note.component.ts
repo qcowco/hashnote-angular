@@ -119,7 +119,7 @@ export class WriteNoteComponent implements OnInit {
   }
 
   private showEncryptionResult() {
-    this.dialog.open(ResultDialogComponent, { width: '900px', height: '130px', data: this.receivedEncryptionCredentials });
+    this.dialog.open(ResultDialogComponent, { width: '950px', height: '140px', data: this.receivedEncryptionCredentials });
   }
 
   public tryGetEncryptedMessage() {
