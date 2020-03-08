@@ -9,3 +9,7 @@
 .mat-dialog-actions {
   place-content: center;
 }
+
+.mat-icon-button i {
+  color: red;
+}
