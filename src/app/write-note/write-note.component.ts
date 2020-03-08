@@ -140,7 +140,7 @@ export class WriteNoteComponent implements OnInit {
 
   public encryptWithDialog() {
     this.openOptions().then( data => {
-      if (data != null) {
+      if (data != null && data.name !== '') {
         this.noteName = data.name;
         this.method = data.method;
 
