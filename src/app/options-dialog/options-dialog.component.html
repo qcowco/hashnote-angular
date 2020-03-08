@@ -1,7 +1,8 @@
 <div class="mat-form-container">
   <mat-form-field>
     <mat-label>Note name</mat-label>
-    <input matInput [(ngModel)]="name">
+    <input matInput #input maxlength="32" [(ngModel)]="name">
+    <mat-hint align="end">{{input.value?.length || 0}}/32</mat-hint>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Select an algorithm</mat-label>
@@ -9,7 +10,6 @@
       <mat-option *ngFor="let method of methods" [value]="method">{{method}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <p>{{selection}}</p>
   <mat-dialog-actions>
     <button mat-button (click)="confirmSelection()" color="primary">Confirm</button>
     <button mat-button (click)="this.dialog.close()">Cancel</button>
