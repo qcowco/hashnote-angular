@@ -70,6 +70,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 @media (max-width: 768px) {
+  .note-textarea {
+    height: calc(90% - 65px);
+  }
+
   #circle-key {
     left: 0;
     bottom: 0;

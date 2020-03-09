@@ -9,14 +9,11 @@
   left: 30%;
   display: inline-flex;
   font-family: 'Inconsolata', monospace;
+  font-size: 13px;
 }
 
 .app-title {
   font-weight: 400;
-}
-
-.note-name {
-  font-size: 15px;
 }
 
 .separator {
@@ -26,4 +23,34 @@
 
 .fa {
   margin-right: 7px;
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}
+
+@media (max-width: 768px) {
+  .text-container {
+    width: 100%;
+    left: initial;
+  }
+
+  .app-title {
+    position: fixed;
+    left: 2%;
+  }
+
+  .note-container {
+    position: fixed;
+    right: 2%;
+  }
+
+  .separator {
+    visibility: hidden;
+  }
+
+  .note-name {
+    background: white;
+  }
 }
