@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Note} from '../model/note/note';
 import {ActivatedRoute} from '@angular/router';
-import {NoteService} from '../model/note-service/note.service';
+import {NoteService} from '../service/note-service/note.service';
 import {MatDialog} from '@angular/material';
 import {KeyDialogComponent} from '../key-dialog/key-dialog.component';
+import {SharedNoteService} from '../service/shared-note/shared-note.service';
 
 @Component({
   selector: 'app-view-note',
@@ -25,7 +26,8 @@ export class ViewNoteComponent implements OnInit {
   private key: string;
 
 
-  constructor(private route: ActivatedRoute, private noteService: NoteService, private dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private noteService: NoteService, private dialog: MatDialog,
+              private sharedNote: SharedNoteService) { }
 
   ngOnInit() {
     this.id = this.getIdParam();
@@ -40,6 +42,8 @@ export class ViewNoteComponent implements OnInit {
       .subscribe(
         data => {
           this.originalNote = data;
+
+          this.sharedNote.emitChange(data);
 
           this.tryDecryptNote();
 

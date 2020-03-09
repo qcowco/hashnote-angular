@@ -1,0 +1,29 @@
+.text-background {
+  background: #ffffff;
+  height: 25px;
+  line-height: 25px;
+}
+
+.text-container {
+  position: absolute;
+  left: 30%;
+  display: inline-flex;
+  font-family: 'Inconsolata', monospace;
+}
+
+.app-title {
+  font-weight: 400;
+}
+
+.note-name {
+  font-size: 15px;
+}
+
+.separator {
+  margin: 0 8px;
+  border-left: solid 1px;
+}
+
+.fa {
+  margin-right: 7px;
+}

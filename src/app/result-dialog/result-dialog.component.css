@@ -45,12 +45,12 @@
 
 .key-string {
   float: left;
-  padding: 10px 0px;
   text-align-last: center;
   border-left: solid 2px;
   border-right: solid 2px;
   width: 90%;
   overflow: hidden;
+  line-height: 40px;
 }
 
 #note-key, .fa-key {
