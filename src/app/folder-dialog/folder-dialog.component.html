@@ -1,0 +1,67 @@
+<mat-dialog-content>
+  <div mat-dialog-title>Folders:</div>
+    <div class="folders">
+      <div class="folder-container" *ngFor="let folder of folders; let isHidden = false">
+        <p *ngIf="folders.length == 0">No folders!</p>
+<!--        FOLDER-->
+        <div class="folder">
+          <button mat-icon-button class="collapse-button" (click)="isHidden = !isHidden"
+                  [disabled]="folder.notes.length === 0">
+            <i class="fa fa-plus" *ngIf="!isHidden"></i>
+            <i class="fa fa-minus" *ngIf="isHidden"></i>
+          </button>
+          <p>{{folder.name}}</p>
+<!--          FOLDER BUTTONS-->
+          <div class="folder-menu">
+            <button mat-icon-button class="fa fa-edit" (click)="updating = true; updatedFolderId = folder.id"></button>
+            <button mat-icon-button class="save-button" (click)="saveNoteToFolder(folder.id)">
+              <i class="fa fa-save"></i>
+            </button>
+            <button mat-icon-button class="delete-button" (click)="deleteFolder(folder.id)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="notes" *ngIf="isHidden">
+          <div class="note-container" *ngFor="let note of folder.notes; let noteHidden = false">
+<!--            NOTE-->
+            <div class="note">
+              <p>{{note.name}}</p>
+<!--              NOTE BUTTONS-->
+              <div class="note-menu">
+                <button mat-icon-button (click)="redirectToNote(note.id)">
+                  <i class="fa fa-external-link"></i>
+                </button>
+                <button mat-icon-button (click)="removeNoteFromFolder(folder.id, note.id); noteHidden = true">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <div class="folder-create-container" *ngIf="!updating">
+    <mat-form-field>
+      <mat-label>Folder name</mat-label>
+      <input matInput [(ngModel)]="folderName">
+    </mat-form-field>
+    <button mat-raised-button (click)="saveFolder()"
+            [disabled]="!isAddFolderValid()">Save folder</button>
+  </div>
+
+  <div class="folder-update-container" *ngIf="updating">
+    <mat-form-field>
+      <input matInput [(ngModel)]="updateFolderName"
+             [placeholder]="findUpdatedFolderName()">
+    </mat-form-field>
+    <div class="update-buttons">
+      <button mat-raised-button (click)="cancelUpdate()">Cancel</button>
+      <div id="separator"></div>
+      <button mat-raised-button (click)="updateFolder()"
+              [disabled]="!isUpdateFolderValid()">Update</button>
+    </div>
+  </div>
+</mat-dialog-content>

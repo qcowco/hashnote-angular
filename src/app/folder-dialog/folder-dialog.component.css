@@ -1,0 +1,58 @@
+mat-dialog-content {
+  height: 100%;
+  grid-template-rows: 10% 78% 10%;
+  overflow: hidden;
+}
+
+.folders {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 5px;
+}
+
+.folders > .folder-container > .folder:nth-child(odd) {
+  background: rgb(211, 211, 211);
+}
+
+.folder-create-container, .folder-update-container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  margin: 10px;
+}
+
+.folder-create-container button, .update-buttons {
+  margin: 10px;
+}
+
+.update-buttons {
+  display: grid;
+  grid-template-columns: auto 5px auto;
+}
+
+.folder {
+  display: grid;
+  grid-template-columns: 40px auto 120px;
+  margin: 5px 0;
+  align-items: center;
+}
+
+.note {
+  background: #9bb000;
+  margin-left: 20px;
+  padding-left: 15px;
+  display: grid;
+  grid-template-columns: auto 80px;
+  align-items: center;
+}
+
+.folder-menu button {
+  vertical-align: middle;
+}
+
+mat-dialog-content {
+  display: grid;
+}
+
+.fa-edit {
+  line-height: 43px;
+}
