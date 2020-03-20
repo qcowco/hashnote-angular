@@ -1,0 +1,58 @@
+.container {
+  display: grid;
+  grid-template-rows: 50px auto;
+  transition: all 0.5s linear;
+}
+
+.container div {
+  text-align: center;
+}
+
+mat-dialog-actions {
+  place-content: center;
+}
+
+#register {
+  /*border-left: solid 2px #1d1d1d;*/
+}
+
+.fields {
+  display: grid;
+}
+
+.switch-form {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+  border-bottom: solid 1px #4bff005c;
+}
+
+
+* {
+  transition: all 0.5s linear;
+}
+
+::ng-deep .user-dialog {
+  transition: all 0.2s ease-in-out;
+}
+
+
+::ng-deep .mat-dialog-container {
+  overflow: hidden;
+}
+
+.shake-class {
+  animation: shake 5s ease-in-out;
+}
+
+@keyframes shake {
+  0% {left: 0}
+  1% {left: -3px}
+  2% {left: 5px}
+  3% {left: -8px}
+  4% {left: 8px}
+  5% {left: -5px}
+  6% {left: 3px}
+  7% {left: 0}
+}

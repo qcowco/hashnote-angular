@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="switch-form">
+    <button mat-button id="login-form-button" (click)="makeLoginForm()">Login</button>
+    <button mat-button id="register-form-button" (click)="makeRegisterForm()">Register</button>
+  </div>
+  <div class="login" *ngIf="login">
+    <mat-dialog-content>
+      <div class="fields" [formGroup]="loginForm">
+      <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput maxlength="20" formControlName="usernameLogin">
+        <mat-error
+          *ngIf="loginForm.controls.usernameLogin.hasError('minlength') ||
+             loginForm.controls.usernameLogin.hasError('maxlength')">
+          Username needs to be 5-20 characters long
+        </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" maxlength="20" formControlName="passwordLogin">
+          <mat-error
+            *ngIf="loginForm.controls.passwordLogin.hasError('minlength') ||
+             loginForm.controls.passwordLogin.hasError('maxlength')">
+            Password needs to be 5-20 characters long
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onLoginClick()" [disabled]="!loginForm.valid"
+              [ngClass]="loginError?'shake-class':''">Confirm</button>
+      <button mat-button>Cancel</button>
+    </mat-dialog-actions>
+  </div>
+  <div class="register" *ngIf="!login">
+    <mat-dialog-content>
+      <div class="fields" [formGroup]="registerForm">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="usernameRegister">
+          <mat-error
+            *ngIf="registerForm.controls.usernameRegister.hasError('minlength') ||
+             registerForm.controls.usernameRegister.hasError('maxlength')">
+            Username needs to be 5-20 characters long
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="passwordRegister">
+          <mat-error
+            *ngIf="registerForm.controls.passwordRegister.hasError('minlength') ||
+             registerForm.controls.passwordRegister.hasError('maxlength')">
+            Password needs to be 5-20 characters long
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" formControlName="confirmPasswordRegister"
+                  [errorStateMatcher]="matcher">
+          <mat-error *ngIf="registerForm.hasError('notSame')">
+            Passwords don't match
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onSaveClick()" [disabled]="!registerForm.valid"
+              [ngClass]="registerError?'shake-class':''">Confirm</button>
+      <button mat-button>Cancel</button>
+    </mat-dialog-actions>
+  </div>
+</div>
+
