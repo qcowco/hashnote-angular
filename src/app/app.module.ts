@@ -8,13 +8,16 @@ import { WriteNoteComponent } from './write-note/write-note.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewNoteComponent } from './view-note/view-note.component';
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatToolbarModule, MatTreeModule} from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { OptionsDialogComponent } from './options-dialog/options-dialog.component';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { KeyDialogComponent } from './key-dialog/key-dialog.component';
 import { HeaderComponent } from './header/header.component';
-import { FolderManagerComponent } from './folder-manager/folder-manager.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import {AuthInterceptorService} from './security/auth-interceptor/auth-interceptor.service';
+import {FolderDialogComponent} from './folder-dialog/folder-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { FolderManagerComponent } from './folder-manager/folder-manager.componen
     ResultDialogComponent,
     KeyDialogComponent,
     HeaderComponent,
-    FolderManagerComponent
+    UserDialogComponent,
+    FolderDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,14 +43,28 @@ import { FolderManagerComponent } from './folder-manager/folder-manager.componen
     MatSelectModule,
     MatInputModule,
     MatToolbarModule,
-    MatTreeModule
+    MatTreeModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:8080']
+      }
+    }),
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     OptionsDialogComponent,
     ResultDialogComponent,
-    KeyDialogComponent
+    KeyDialogComponent,
+    FolderDialogComponent
   ]
 })
 export class AppModule { }
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
