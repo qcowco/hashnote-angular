@@ -9,9 +9,8 @@ import {MAT_DIALOG_DATA} from '@angular/material/';
 })
 export class OptionsDialogComponent implements OnInit {
   private name: string;
-  private selection: string;
-  private methods: string[];
-  // todo methods from rest api
+  private selection: Method;
+  private methods: Method[];
 
   constructor(public dialog: MatDialogRef<OptionsDialogComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public defaultValues) {
     this.name = defaultValues.name;
@@ -20,12 +19,20 @@ export class OptionsDialogComponent implements OnInit {
 
   ngOnInit() {
     this.methods = [
-      'AES'
+      { name: 'AES', description: 'AES encryption with a 256-bit symmetric key'},
+      { name: 'DESede', description: '3DES encryption with a 168-bit symmetric key'},
+      { name: 'DES', description: 'DES encryption with a 56-bit symmetric key'}
     ];
+    this.selection = this.methods[0];
   }
 
   public confirmSelection() {
-    this.dialog.close({ name: this.name, method: this.selection });
+    this.dialog.close({ name: this.name, method: this.selection.name });
   }
 
+}
+
+interface Method {
+  name: string;
+  description: string;
 }

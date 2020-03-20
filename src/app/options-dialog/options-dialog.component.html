@@ -7,9 +7,10 @@
   <mat-form-field>
     <mat-label>Select an algorithm</mat-label>
     <mat-select [value]="selection" [(ngModel)]="selection">
-      <mat-option *ngFor="let method of methods" [value]="method">{{method}}</mat-option>
+      <mat-option *ngFor="let method of methods" [value]="method">{{method.name}}</mat-option>
     </mat-select>
   </mat-form-field>
+  <p>{{selection.description}}</p>
   <mat-dialog-actions>
     <button mat-button (click)="confirmSelection()" color="primary">Confirm</button>
     <button mat-button (click)="this.dialog.close()">Cancel</button>
