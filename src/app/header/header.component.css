@@ -2,28 +2,70 @@
   background: #ffffff;
   height: 25px;
   line-height: 25px;
+  border-top: solid #4a8858 1px;
+  display: flex;
+  font-family: 'Inconsolata', monospace;
+  font-size: 14px;
 }
 
-.text-container {
-  position: absolute;
-  left: 30%;
-  display: inline-flex;
-  font-family: 'Inconsolata', monospace;
-  font-size: 13px;
+.left-side {
+  width: 40%;
 }
 
 .app-title {
-  font-weight: 400;
+  float: right;
+  margin-right: 8px;
 }
 
-.separator {
-  margin: 0 8px;
-  border-left: solid 1px;
+.right-side {
+  width: 60%;
+  border-left: solid 1px #4a8858;
+}
+
+.note-name {
+  float: left;
+  margin-left: 10px;
+}
+
+.folder-icon {
+  float: right;
+}
+
+.note-container {
+  display: flex;
+  padding: 0 12px;
+  margin-left: 12px;
+  border-left: solid 1px #4a8858;
 }
 
 .fa {
   margin-right: 7px;
 }
+
+.app-menu {
+  float: right;
+}
+
+.app-menu span {
+  border-left: solid 1px;
+  padding-left: 8px;
+}
+
+/*.user-node {*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.node {*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.node span {*/
+/*  border-left: solid 1px #4a8858;*/
+/*}*/
+
+/*.node i {*/
+/*  margin-left: 5px;*/
+/*}*/
 
 a {
   text-decoration: none;
@@ -36,12 +78,16 @@ a {
     left: initial;
   }
 
+  .right-side {
+    border-left: initial;
+  }
+
   .app-title {
     position: fixed;
     left: 2%;
   }
 
-  .note-container {
+  .note-name {
     position: fixed;
     right: 2%;
   }
@@ -50,7 +96,7 @@ a {
     visibility: hidden;
   }
 
-  .note-name {
+  .node {
     background: white;
   }
 }
