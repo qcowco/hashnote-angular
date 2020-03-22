@@ -1,10 +1,8 @@
-import {Component, ElementRef, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {FolderService} from '../service/folder-service/folder.service';
 import {Folder} from '../model/folder/folder';
-import {MAT_DIALOG_DATA, MatDialogRef, MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material';
-import {FlatTreeControl} from '@angular/cdk/tree';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Note} from '../model/note/note';
-import {SharedNoteService} from '../service/shared-note/shared-note.service';
 import {SecurityService} from '../service/security-service/security.service';
 import {Router} from '@angular/router';
 
@@ -19,24 +17,7 @@ export class FolderDialogComponent implements OnInit {
   private updating = false;
   private updatedFolderId: string;
 
-  // private transformer = (node: FolderNode, level: number) => {
-  //   return {
-  //     expandable: !!node.children && node.children.length > 0,
-  //     name: node.name,
-  //     level: level
-  //   };
-  // }
   folders: Folder[];
-  // treeControl = new FlatTreeControl<ExampleFlatNode> (
-  //   node => node.level, node => node.expandable
-  // );
-  // treeFlattener = new MatTreeFlattener(
-  //   this.transformer, node => node.level, node => node.expandable, node => node.children
-  // );
-  // folderNodes: FolderNode[];
-  // private dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-
 
   constructor(private dialogRef: MatDialogRef<FolderDialogComponent>, private folderService: FolderService,
               private securityService: SecurityService, @Optional() @Inject(MAT_DIALOG_DATA) private note: Note, private router: Router ) {
@@ -111,21 +92,4 @@ export class FolderDialogComponent implements OnInit {
   cancelUpdate() {
     this.updating = false;
   }
-}
-
-interface ExampleFlatNode {
-  expandable: boolean;
-  name: string;
-  level: number;
-}
-
-interface FolderNode {
-  id: string;
-  name: string;
-  children?: NoteNode[];
-}
-
-interface NoteNode {
-  id: string;
-  name: string;
 }

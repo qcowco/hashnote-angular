@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WriteNoteComponent } from './write-note/write-note.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewNoteComponent } from './view-note/view-note.component';
-import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatToolbarModule, MatTreeModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatToolbarModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { OptionsDialogComponent } from './options-dialog/options-dialog.component';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
@@ -43,7 +43,6 @@ import {FolderDialogComponent} from './folder-dialog/folder-dialog.component';
     MatSelectModule,
     MatInputModule,
     MatToolbarModule,
-    MatTreeModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -60,7 +59,8 @@ import {FolderDialogComponent} from './folder-dialog/folder-dialog.component';
     OptionsDialogComponent,
     ResultDialogComponent,
     KeyDialogComponent,
-    FolderDialogComponent
+    FolderDialogComponent,
+    UserDialogComponent
   ]
 })
 export class AppModule { }
