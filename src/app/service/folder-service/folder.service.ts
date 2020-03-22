@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Folder} from '../../model/folder/folder';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class FolderService {
   private readonly folderUrl: string;
 
   constructor(private http: HttpClient) {
-    this.folderUrl = 'http://localhost:8080/api/v1/folders';
+    this.folderUrl = `${environment.api}/folders`;
   }
 
   findAll(): Observable<Folder[]> {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class SecurityService {
   private readonly userUrl: string;
 
   constructor(private http: HttpClient) {
-    this.userUrl = 'http://localhost:8080';
+    this.userUrl = environment.url;
   }
 
   isLogged(): boolean {

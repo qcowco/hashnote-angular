@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Note} from '../../model/note/note';
 import {Observable} from 'rxjs';
 import {NoteRequest} from '../../model/note-request/note-request';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class NoteService {
   private readonly noteUrl: string;
 
   constructor(private http: HttpClient) {
-    this.noteUrl = 'http://localhost:8080/api/v1/notes';
+    this.noteUrl = `${environment.api}/notes`;
   }
 
   public findAll(): Observable<Note[]> {
