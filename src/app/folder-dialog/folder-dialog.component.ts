@@ -5,8 +5,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Note} from '../model/note/note';
 import {SecurityService} from '../service/security-service/security.service';
 import {Router} from '@angular/router';
-import {interval} from 'rxjs';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-folder-dialog',
@@ -121,6 +119,34 @@ export class FolderDialogComponent implements OnInit {
 
   hasExpire(note: Note) {
     return (note.expiresAt != null);
+  }
+
+  timeSince(date: Date) {
+    const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+
+    let interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+      return interval + ' years ago';
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return interval + ' months ago';
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return interval + ' days ago';
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return interval + ' hours ago';
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+      return interval + ' minutes ago';
+    }
+    return Math.floor(seconds) + ' seconds ago';
+
   }
 
 }
