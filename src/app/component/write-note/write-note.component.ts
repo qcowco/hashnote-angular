@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {Note} from '../model/note/note';
-import {NoteRequest} from '../model/note-request/note-request';
+import {Note} from '../../model/note/note';
+import {NoteRequest} from '../../model/note-request/note-request';
 import {ActivatedRoute} from '@angular/router';
-import {NoteService} from '../service/note-service/note.service';
+import {NoteService} from '../../service/note-service/note.service';
 import {MatDialog} from '@angular/material';
-import {ResultDialogComponent} from '../result-dialog/result-dialog.component';
-import {EncryptionCredentials} from '../model/encryption-credentials/encryption-credentials';
-import {OptionsDialogComponent} from '../options-dialog/options-dialog.component';
-import {SharedNoteService} from '../service/shared-note/shared-note.service';
+import {ResultDialogComponent} from '../../dialog/result-dialog/result-dialog.component';
+import {EncryptionCredentials} from '../../model/encryption-credentials/encryption-credentials';
+import {OptionsDialogComponent} from '../../dialog/options-dialog/options-dialog.component';
+import {SharedNoteService} from '../../service/shared-note/shared-note.service';
 
 @Component({
   selector: 'app-write-note',

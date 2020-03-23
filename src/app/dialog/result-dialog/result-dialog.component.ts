@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {EncryptionCredentials} from '../model/encryption-credentials/encryption-credentials';
+import {EncryptionCredentials} from '../../model/encryption-credentials/encryption-credentials';
 
 @Component({
   selector: 'app-result-dialog',

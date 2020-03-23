@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {SharedNoteService} from '../service/shared-note/shared-note.service';
-import {Note} from '../model/note/note';
-import {SecurityService} from '../service/security-service/security.service';
+import {SharedNoteService} from '../../service/shared-note/shared-note.service';
+import {Note} from '../../model/note/note';
+import {SecurityService} from '../../service/security-service/security.service';
 import {MatDialog} from '@angular/material';
-import {UserDialogComponent} from '../user-dialog/user-dialog.component';
-import {FolderDialogComponent} from '../folder-dialog/folder-dialog.component';
+import {UserDialogComponent} from '../../dialog/user-dialog/user-dialog.component';
+import {FolderDialogComponent} from '../../dialog/folder-dialog/folder-dialog.component';
 
 @Component({
   selector: 'app-header',

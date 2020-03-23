@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { WriteNoteComponent } from './write-note/write-note.component';
+import { WriteNoteComponent } from './component/write-note/write-note.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ViewNoteComponent } from './view-note/view-note.component';
+import { ViewNoteComponent } from './component/view-note/view-note.component';
 import {
   MatButtonModule,
   MatCheckboxModule,
@@ -17,15 +17,15 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { OptionsDialogComponent } from './options-dialog/options-dialog.component';
-import { ResultDialogComponent } from './result-dialog/result-dialog.component';
+import { OptionsDialogComponent } from './dialog/options-dialog/options-dialog.component';
+import { ResultDialogComponent } from './dialog/result-dialog/result-dialog.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { KeyDialogComponent } from './key-dialog/key-dialog.component';
-import { HeaderComponent } from './header/header.component';
+import { KeyDialogComponent } from './dialog/key-dialog/key-dialog.component';
+import { HeaderComponent } from './component/header/header.component';
 import {JwtModule} from '@auth0/angular-jwt';
-import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { UserDialogComponent } from './dialog/user-dialog/user-dialog.component';
 import {AuthInterceptorService} from './security/auth-interceptor/auth-interceptor.service';
-import {FolderDialogComponent} from './folder-dialog/folder-dialog.component';
+import {FolderDialogComponent} from './dialog/folder-dialog/folder-dialog.component';
 
 @NgModule({
   declarations: [

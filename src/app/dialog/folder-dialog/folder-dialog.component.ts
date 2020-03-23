@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
-import {FolderService} from '../service/folder-service/folder.service';
-import {Folder} from '../model/folder/folder';
+import {FolderService} from '../../service/folder-service/folder.service';
+import {Folder} from '../../model/folder/folder';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Note} from '../model/note/note';
-import {SecurityService} from '../service/security-service/security.service';
+import {Note} from '../../model/note/note';
+import {SecurityService} from '../../service/security-service/security.service';
 import {Router} from '@angular/router';
 
 @Component({

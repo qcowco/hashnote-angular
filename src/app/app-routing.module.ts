@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {WriteNoteComponent} from './write-note/write-note.component';
-import {ViewNoteComponent} from './view-note/view-note.component';
+import {WriteNoteComponent} from './component/write-note/write-note.component';
+import {ViewNoteComponent} from './component/view-note/view-note.component';
 
 
 const routes: Routes = [

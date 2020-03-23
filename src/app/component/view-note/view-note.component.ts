@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Note} from '../model/note/note';
+import {Note} from '../../model/note/note';
 import {ActivatedRoute} from '@angular/router';
-import {NoteService} from '../service/note-service/note.service';
+import {NoteService} from '../../service/note-service/note.service';
 import {MatDialog} from '@angular/material';
-import {KeyDialogComponent} from '../key-dialog/key-dialog.component';
-import {SharedNoteService} from '../service/shared-note/shared-note.service';
+import {KeyDialogComponent} from '../../dialog/key-dialog/key-dialog.component';
+import {SharedNoteService} from '../../service/shared-note/shared-note.service';
 
 @Component({
   selector: 'app-view-note',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SecurityService} from '../service/security-service/security.service';
+import {SecurityService} from '../../service/security-service/security.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { MatDialogRef} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
