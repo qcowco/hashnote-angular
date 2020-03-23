@@ -85,7 +85,7 @@ export class UserDialogComponent implements OnInit {
     this.dialogRef.updateSize('350px', '370px');
   }
 
-  private shakeButton() {
-    this.loginError = true;
+  closeDialog() {
+    this.dialogRef.close();
   }
 }
