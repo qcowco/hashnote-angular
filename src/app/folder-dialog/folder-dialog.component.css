@@ -41,12 +41,12 @@ mat-dialog-content {
   grid-gap: 3px;
 }
 
-.note, .chuj {
+.note, .note-headers {
   background: #efefef;
   margin-left: 20px;
   padding-left: 15px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 80px;
+  grid-template-columns: 2fr 1fr 1fr 80px 80px 80px;
   grid-gap: 8px;
 }
 

@@ -29,11 +29,15 @@
             <p>Name</p>
             <p>Created at</p>
             <p>Expires in</p>
+            <p>Unlocks</p>
+            <p>Max</p>
           </div>
-            <div class="note" *ngFor="let note of folder.notes; let noteHidden = false" >
+            <div class="note" *ngFor="let note of folder.notes; let noteHidden = false">
               <p>{{note.name}}</p>
-              <p>{{getDateTime(note)}}</p>
+              <p [matTooltip]="getDateTime(note)">{{timeSince(note.createdAt)}}</p>
               <p [innerText]="getExpiration(note)"></p>
+              <p [innerText]="note.keyVisits"></p>
+              <p [innerText]="note.maxVisits || 'infinite'"></p>
 <!--              NOTE BUTTONS-->
               <div class="note-menu">
                 <button mat-icon-button (click)="redirectToNote(note.id)">

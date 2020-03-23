@@ -33,11 +33,11 @@ export class HeaderComponent implements OnInit {
   }
 
   openUserDialog() {
-    return this.dialog.open(UserDialogComponent, { width: '350px', height: '280px', panelClass: 'user-dialog' }).afterClosed().toPromise();
+    return this.dialog.open(UserDialogComponent, { width: '350px', height: '295px', panelClass: 'user-dialog' }).afterClosed().toPromise();
   }
 
   openFolderDialog() {
-    return this.dialog.open(FolderDialogComponent, { width: '800px', height: '600px', data:  this.emittedNote})
+    return this.dialog.open(FolderDialogComponent, { width: '925px', height: '600px', data:  this.emittedNote})
       .afterClosed().toPromise();
   }
 

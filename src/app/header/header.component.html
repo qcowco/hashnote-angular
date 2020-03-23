@@ -4,7 +4,9 @@
   </div>
   <div class="right-side">
     <div class="note-name" *ngIf="getName() != null">
-      <span><i class="fa fa-file-text"></i>{{getName()}}</span>
+      <span><i class="fa fa-file-text"></i>{{emittedNote.name}}</span>
+      <span><i class="fa fa-unlock"></i>{{emittedNote.keyVisits}}</span>
+      <span *ngIf="emittedNote.maxVisits > 0">/{{emittedNote.maxVisits}}</span>
     </div>
     <div class="app-menu">
       <span (click)="openFolderDialog()" *ngIf="securityService.isLogged()">Folders
