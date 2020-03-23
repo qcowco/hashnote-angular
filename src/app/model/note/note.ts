@@ -4,6 +4,8 @@ export class Note {
   public message?: string;
   public createdAt?: Date;
   public expiresAt?: Date;
+  public keyVisits?: number;
+  public maxVisits?: number;
 
   constructor(name: string, message: string) {
     this.name = name;
