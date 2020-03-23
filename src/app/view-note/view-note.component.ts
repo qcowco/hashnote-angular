@@ -116,8 +116,10 @@ export class ViewNoteComponent implements OnInit {
       this.setErrorMessage('Error: Unable to establish a connection with the API server.');
     } else if (error.status === 400) {
       this.setErrorMessage('Error: Wrong key.');
+    } else if (error.status === 404) {
+      this.setErrorMessage('Error: Not found');
     } else {
-      this.setErrorMessage('Error: Unknown error.');
+      this.setErrorMessage('Error: Something went wrong');
     }
   }
 
