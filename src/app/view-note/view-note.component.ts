@@ -95,6 +95,7 @@ export class ViewNoteComponent implements OnInit {
     this.noteService.findDecrypted(this.id, this.key)
       .subscribe( data => {
         this.decryptedNote = data;
+        this.sharedNote.emitChange(data);
 
         this.isDecrypting = false;
       },
