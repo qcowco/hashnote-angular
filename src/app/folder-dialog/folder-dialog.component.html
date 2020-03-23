@@ -14,7 +14,7 @@
 <!--          FOLDER BUTTONS-->
           <div class="folder-menu">
             <button mat-icon-button class="fa fa-edit" (click)="updating = true; updatedFolderId = folder.id"></button>
-            <button mat-icon-button class="save-button" (click)="saveNoteToFolder(folder.id)">
+            <button mat-icon-button class="save-button" (click)="saveNoteToFolder(folder.id)" [disabled]="!note">
               <i class="fa fa-save"></i>
             </button>
             <button mat-icon-button class="delete-button" (click)="deleteFolder(folder.id)">
