@@ -8,7 +8,7 @@
       <div class="fields" [formGroup]="loginForm">
       <mat-form-field>
           <mat-label>Username</mat-label>
-          <input matInput maxlength="20" formControlName="usernameLogin">
+          <input matInput maxlength="20" formControlName="usernameLogin" [spellcheck]="false">
         <mat-error
           *ngIf="loginForm.controls.usernameLogin.hasError('minlength') ||
              loginForm.controls.usernameLogin.hasError('maxlength')">
@@ -17,7 +17,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput type="password" maxlength="20" formControlName="passwordLogin">
+          <input matInput type="password" maxlength="20" formControlName="passwordLogin" [spellcheck]="false">
           <mat-error
             *ngIf="loginForm.controls.passwordLogin.hasError('minlength') ||
              loginForm.controls.passwordLogin.hasError('maxlength')">
@@ -37,7 +37,7 @@
       <div class="fields" [formGroup]="registerForm">
         <mat-form-field>
           <mat-label>Username</mat-label>
-          <input matInput formControlName="usernameRegister">
+          <input matInput formControlName="usernameRegister" [spellcheck]="false">
           <mat-error
             *ngIf="registerForm.controls.usernameRegister.hasError('minlength') ||
              registerForm.controls.usernameRegister.hasError('maxlength')">
@@ -46,7 +46,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="passwordRegister">
+          <input matInput type="password" formControlName="passwordRegister" [spellcheck]="false">
           <mat-error
             *ngIf="registerForm.controls.passwordRegister.hasError('minlength') ||
              registerForm.controls.passwordRegister.hasError('maxlength')">
@@ -56,7 +56,7 @@
         <mat-form-field>
           <mat-label>Confirm Password</mat-label>
           <input matInput type="password" formControlName="confirmPasswordRegister"
-                  [errorStateMatcher]="matcher">
+                  [errorStateMatcher]="matcher" [spellcheck]="false">
           <mat-error *ngIf="registerForm.hasError('notSame')">
             Passwords don't match
           </mat-error>
