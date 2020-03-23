@@ -19,11 +19,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
-  private usernameRegister: string;
-  private passwordRegister: string;
-  private confirmPasswordRegister: string;
-  private usernameLogin: string;
-  private passwordLogin: string;
   private login = true;
   loginForm: FormGroup;
   registerForm: FormGroup;
