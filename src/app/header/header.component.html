@@ -1,25 +1,16 @@
 <div class="text-background">
-<!--  <div *ngIf="userLogged()">-->
-<!--    <span>Welcome, {{username}}</span>-->
-<!--  </div>-->
-<!--  <button mat-icon-button *ngIf="userLogged()">-->
-<!--    <i class="fa fa-user"></i>-->
-<!--  </button>-->
-<!--  <button mat-icon-button>-->
-<!--    <i class="fa fa-file"></i>-->
-<!--  </button>-->
   <div class="left-side">
     <span class="app-title"><a href="/">hashnote</a></span>
   </div>
   <div class="right-side">
-    <div class="note-name" *ngIf="getName() != null">Current note:
+    <div class="note-name" *ngIf="getName() != null">
       <span><i class="fa fa-file-text"></i>{{getName()}}</span>
     </div>
     <div class="app-menu">
       <span (click)="openFolderDialog()" *ngIf="securityService.isLogged()">Folders
         <i class="fa fa-folder-open"></i>
       </span>
-      <span (click)="openUserDialog()" *ngIf="!securityService.isLogged()">User
+      <span (click)="openUserDialog()" *ngIf="!securityService.isLogged()">Sign in
         <i class="fa fa-user"></i>
       </span>
       <span (click)="securityService.logout()" *ngIf="securityService.isLogged()">Sign out {{securityService.getLoggedUser()}}
@@ -27,18 +18,4 @@
       </span>
     </div>
   </div>
-<!--  <div class="text-container">-->
-<!--    <span class="app-title"><a href="/">hashnote</a></span>-->
-<!--    <div class="note-container">-->
-<!--&lt;!&ndash;        <div class="user-node" *ngIf="userLogged()">&ndash;&gt;-->
-<!--&lt;!&ndash;          <span>~{{username}}</span>&ndash;&gt;-->
-<!--&lt;!&ndash;          <button mat-icon-button>&ndash;&gt;-->
-<!--&lt;!&ndash;            <i class="fa fa-folder"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;          </button>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--        <div class="note-name" *ngIf="getName() != null">-->
-<!--          <span><i class="fa fa-file-text"></i>{{getName()}}</span>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--  </div>-->
 </div>
