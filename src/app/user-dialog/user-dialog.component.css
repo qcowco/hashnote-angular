@@ -12,12 +12,9 @@ mat-dialog-actions {
   place-content: center;
 }
 
-#register {
-  /*border-left: solid 2px #1d1d1d;*/
-}
-
 .fields {
   display: grid;
+  grid-gap: 15px;
 }
 
 .switch-form {
