@@ -26,7 +26,6 @@ export class UserDialogComponent implements OnInit {
   loginError = false;
   registerError = false;
 
-
   constructor(private userService: SecurityService, private dialogRef: MatDialogRef<UserDialogComponent>,
               private formBuilder: FormBuilder) {
   }
@@ -78,12 +77,12 @@ export class UserDialogComponent implements OnInit {
 
   makeLoginForm() {
     this.login = true;
-    this.dialogRef.updateSize( '350px', '280px');
+    this.dialogRef.updateSize( '350px', '295px');
   }
 
   makeRegisterForm() {
     this.login = false;
-    this.dialogRef.updateSize('350px', '340px');
+    this.dialogRef.updateSize('350px', '370px');
   }
 
   private shakeButton() {
