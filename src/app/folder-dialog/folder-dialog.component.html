@@ -24,10 +24,16 @@
         </div>
 
         <div class="notes" *ngIf="isHidden">
-          <div class="note-container" *ngFor="let note of folder.notes; let noteHidden = false">
 <!--            NOTE-->
-            <div class="note">
+          <div class="note-headers">
+            <p>Name</p>
+            <p>Created at</p>
+            <p>Expires in</p>
+          </div>
+            <div class="note" *ngFor="let note of folder.notes; let noteHidden = false" >
               <p>{{note.name}}</p>
+              <p>{{getDateTime(note)}}</p>
+              <p [innerText]="getExpiration(note)"></p>
 <!--              NOTE BUTTONS-->
               <div class="note-menu">
                 <button mat-icon-button (click)="redirectToNote(note.id)">
@@ -38,9 +44,7 @@
                 </button>
               </div>
             </div>
-          </div>
         </div>
-
       </div>
     </div>
   <div class="folder-create-container" *ngIf="!updating">

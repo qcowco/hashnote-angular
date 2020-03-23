@@ -9,12 +9,15 @@ import {MAT_DIALOG_DATA} from '@angular/material/';
 })
 export class OptionsDialogComponent implements OnInit {
   private name: string;
-  private selection: Method;
+  private methodSelection: Method;
   private methods: Method[];
+  private destructionSelection: Time;
+  private destructionTimes: Time[];
+  private selfDestruct = false;
 
   constructor(public dialog: MatDialogRef<OptionsDialogComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public defaultValues) {
     this.name = defaultValues.name;
-    this.selection = defaultValues.method;
+    this.methodSelection = defaultValues.method;
   }
 
   ngOnInit() {
@@ -23,11 +26,39 @@ export class OptionsDialogComponent implements OnInit {
       { name: 'DESede', description: '3DES encryption with a 168-bit symmetric key'},
       { name: 'DES', description: 'DES encryption with a 56-bit symmetric key'}
     ];
-    this.selection = this.methods[0];
+    this.methodSelection = this.methods[0];
+    this.destructionTimes = [
+      { name: '1 minute', value: 1 },
+      { name: '2 minutes', value: 2 },
+      { name: '5 minutes', value: 5 },
+      { name: '10 minutes', value: 10 },
+      { name: '30 minutes', value: 30 },
+      { name: '1 hour', value: 60 },
+      { name: '6 hours', value: 360 },
+      { name: '24 hours', value: 1440 }
+    ];
+    this.destructionSelection = this.destructionTimes[2];
   }
 
   public confirmSelection() {
-    this.dialog.close({ name: this.name, method: this.selection.name });
+    this.dialog.close({ name: this.name, method: this.methodSelection.name, destruction: this.getDestructionTime() });
+  }
+
+  getDestructionTime() {
+    if (this.selfDestruct) {
+      return this.destructionSelection.value;
+    } else {
+      return null;
+    }
+  }
+
+  checkboxChecked() {
+    this.selfDestruct = !this.selfDestruct;
+    if (this.selfDestruct) {
+      this.dialog.updateSize('350px', '420px');
+    } else {
+      this.dialog.updateSize('350px', '350px');
+    }
   }
 
 }
@@ -35,4 +66,9 @@ export class OptionsDialogComponent implements OnInit {
 interface Method {
   name: string;
   description: string;
+}
+
+interface Time {
+  name: string;
+  value: number;
 }

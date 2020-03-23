@@ -15,12 +15,13 @@ import {SharedNoteService} from '../service/shared-note/shared-note.service';
   styleUrls: ['./write-note.component.css']
 })
 export class WriteNoteComponent implements OnInit {
-  private placeholderMessage = 'hashnote - type something';
+  private placeholderMessage = '';
   private textareaInput: string;
   private errorMessage: string;
 
   private method = 'AES';
   private noteName: string;
+  private destructionTime: number;
 
   private errorOccured = false;
   private isEncrypting = false;
@@ -79,13 +80,15 @@ export class WriteNoteComponent implements OnInit {
   }
 
   public createNoteRequest() {
-    this.createdNoteRequest = new NoteRequest(this.createdNote, this.method);
+    this.createdNoteRequest = new NoteRequest(this.createdNote, this.method, this.destructionTime);
   }
 
   public getEncryptedNote() {
     return this.noteService.find(this.receivedEncryptionCredentials.getId()).subscribe(data => {
         this.receivedEncryptedNote = data;
         this.sharedNote.emitChange(data);
+        console.log(data);
+        // todo oddzielic emit
       },
       error => {
       this.handleError(error);
@@ -137,7 +140,7 @@ export class WriteNoteComponent implements OnInit {
 
   public openOptions() {
     const dialogRef = this.dialog.open(OptionsDialogComponent,
-      { width: '350px', height: '225px', data: { name: this.noteName, method: this.method} });
+      { width: '350px', height: '350px', data: { name: this.noteName, method: this.method} });
     return dialogRef.afterClosed().toPromise();
   }
 
@@ -146,6 +149,8 @@ export class WriteNoteComponent implements OnInit {
       if (data != null && data.name !== '') {
         this.noteName = data.name;
         this.method = data.method;
+        this.destructionTime = data.destruction;
+  // todo: wydzielic wspolna metode
 
         this.encryptNote();
       }
@@ -157,6 +162,7 @@ export class WriteNoteComponent implements OnInit {
       if (data != null) {
         this.noteName = data.name;
         this.method = data.method;
+        this.destructionTime = data.destruction;
       }
     });
   }

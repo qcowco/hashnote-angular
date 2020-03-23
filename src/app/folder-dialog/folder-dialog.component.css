@@ -36,13 +36,28 @@ mat-dialog-content {
   align-items: center;
 }
 
-.note {
-  background: #9bb000;
+.notes {
+  display: grid;
+  grid-gap: 3px;
+}
+
+.note, .chuj {
+  background: #efefef;
   margin-left: 20px;
   padding-left: 15px;
   display: grid;
-  grid-template-columns: auto 80px;
+  grid-template-columns: 2fr 1fr 1fr 80px;
+  grid-gap: 8px;
+}
+
+.note {
   align-items: center;
+}
+
+.note-headers {
+  height: 25px;
+  align-content: center;
+  font-weight: 500;
 }
 
 .folder-menu button {

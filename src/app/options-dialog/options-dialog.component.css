@@ -9,3 +9,24 @@
 .mat-form-field {
   width: 95%;
 }
+
+.self-destruct-note {
+  display: grid;
+  grid-template-columns: 40px auto;
+}
+
+.self-destruct-note mat-checkbox {
+  align-self: center;
+}
+
+.self-destruct-note p {
+  text-align: left;
+}
+
+::ng-deep .cdk-overlay-pane {
+  transition: all 0.2s ease-in-out;
+}
+
+::ng-deep .mat-dialog-container {
+  overflow-y: hidden;
+}

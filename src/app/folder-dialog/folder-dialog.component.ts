@@ -5,6 +5,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Note} from '../model/note/note';
 import {SecurityService} from '../service/security-service/security.service';
 import {Router} from '@angular/router';
+import {interval} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-folder-dialog',
@@ -21,10 +23,12 @@ export class FolderDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<FolderDialogComponent>, private folderService: FolderService,
               private securityService: SecurityService, @Optional() @Inject(MAT_DIALOG_DATA) private note: Note, private router: Router ) {
+    console.log(note);
   }
 
   ngOnInit() {
     this.folderService.findAll().subscribe(data => {
+      console.log(data);
       this.folders = data;
     });
   }
@@ -48,7 +52,7 @@ export class FolderDialogComponent implements OnInit {
   saveNoteToFolder(folderId: string) {
     this.folderService.saveNoteToFolder(folderId, this.note.id).subscribe( data => {
       const folder = this.folders.find(e => e.id === folderId);
-      folder.notes.push({ id: this.note.id, name: this.note.name });
+      folder.notes.push({ id: this.note.id, name: this.note.name, createdAt: this.note.createdAt, expiresAt: this.note.expiresAt });
     });
   }
 
@@ -92,4 +96,31 @@ export class FolderDialogComponent implements OnInit {
   cancelUpdate() {
     this.updating = false;
   }
+
+  getExpiration(note: Note) {
+    let result = 'never';
+    if (this.hasExpire(note)) {
+      const seconds = this.getRemainingSeconds(note);
+      if (seconds > 60) {
+        result = Math.ceil(seconds / 60) + ' minutes';
+      } else {
+        result = Math.ceil(seconds) + ' seconds';
+      }
+    }
+    return result;
+  }
+
+  getRemainingSeconds(note: Note) {
+    const expireTime = new Date(note.expiresAt).getTime();
+    return (expireTime - new Date().getTime()) / 1000;
+  }
+
+  getDateTime(note: Note) {
+    return new Date(note.createdAt).toUTCString();
+  }
+
+  hasExpire(note: Note) {
+    return (note.expiresAt != null);
+  }
+
 }
