@@ -7,7 +7,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WriteNoteComponent } from './write-note/write-note.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewNoteComponent } from './view-note/view-note.component';
-import {MatButtonModule, MatCheckboxModule, MatDialogModule, MatInputModule, MatSelectModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatInputModule,
+  MatSelectModule,
+  MatToolbarModule,
+  MatTooltipModule
+} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { OptionsDialogComponent } from './options-dialog/options-dialog.component';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
@@ -50,7 +58,8 @@ import {FolderDialogComponent} from './folder-dialog/folder-dialog.component';
       }
     }),
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
