@@ -11,9 +11,10 @@ export class OptionsDialogComponent implements OnInit {
   private name: string;
   private methodSelection: Method;
   private methods: Method[];
+  private selfDestruct = false;
   private destructionSelection: Time;
   private destructionTimes: Time[];
-  private selfDestruct = false;
+  private visits: number;
 
   constructor(public dialog: MatDialogRef<OptionsDialogComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public defaultValues) {
     this.name = defaultValues.name;
@@ -28,6 +29,7 @@ export class OptionsDialogComponent implements OnInit {
     ];
     this.methodSelection = this.methods[0];
     this.destructionTimes = [
+      { name: 'None', value: 0 },
       { name: '1 minute', value: 1 },
       { name: '2 minutes', value: 2 },
       { name: '5 minutes', value: 5 },
@@ -37,11 +39,11 @@ export class OptionsDialogComponent implements OnInit {
       { name: '6 hours', value: 360 },
       { name: '24 hours', value: 1440 }
     ];
-    this.destructionSelection = this.destructionTimes[2];
+    this.destructionSelection = this.destructionTimes[0];
   }
 
   public confirmSelection() {
-    this.dialog.close({ name: this.name, method: this.methodSelection.name, destruction: this.getDestructionTime() });
+    this.dialog.close({ name: this.name, method: this.methodSelection.name, destruction: this.getDestructionTime(), visits: this.visits });
   }
 
   getDestructionTime() {
@@ -55,7 +57,7 @@ export class OptionsDialogComponent implements OnInit {
   checkboxChecked() {
     this.selfDestruct = !this.selfDestruct;
     if (this.selfDestruct) {
-      this.dialog.updateSize('350px', '420px');
+      this.dialog.updateSize('350px', '480px');
     } else {
       this.dialog.updateSize('350px', '350px');
     }

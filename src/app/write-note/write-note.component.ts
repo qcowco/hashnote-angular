@@ -22,6 +22,7 @@ export class WriteNoteComponent implements OnInit {
   private method = 'AES';
   private noteName: string;
   private destructionTime: number;
+  private visits: number;
 
   private errorOccured = false;
   private isEncrypting = false;
@@ -80,7 +81,7 @@ export class WriteNoteComponent implements OnInit {
   }
 
   public createNoteRequest() {
-    this.createdNoteRequest = new NoteRequest(this.createdNote, this.method, this.destructionTime);
+    this.createdNoteRequest = new NoteRequest(this.createdNote, this.method, this.destructionTime, this.visits);
   }
 
   public getEncryptedNote() {
@@ -150,6 +151,7 @@ export class WriteNoteComponent implements OnInit {
         this.noteName = data.name;
         this.method = data.method;
         this.destructionTime = data.destruction;
+        this.visits = data.visits;
   // todo: wydzielic wspolna metode
 
         this.encryptNote();
@@ -163,6 +165,7 @@ export class WriteNoteComponent implements OnInit {
         this.noteName = data.name;
         this.method = data.method;
         this.destructionTime = data.destruction;
+        this.visits = data.visits;
       }
     });
   }
