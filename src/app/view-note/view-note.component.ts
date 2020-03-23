@@ -12,7 +12,7 @@ import {SharedNoteService} from '../service/shared-note/shared-note.service';
   styleUrls: ['./view-note.component.css']
 })
 export class ViewNoteComponent implements OnInit {
-  private placeholderMessage = 'hashnote - type something';
+  private placeholderMessage = '';
 
   private originalNote: Note;
   private decryptedNote: Note;
@@ -149,3 +149,4 @@ export class ViewNoteComponent implements OnInit {
     }
   }
 }
+
