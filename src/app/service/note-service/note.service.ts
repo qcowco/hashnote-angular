@@ -25,7 +25,7 @@ export class NoteService {
   }
 
   public findDecrypted(id: string, key: string): Observable<Note> {
-    return this.http.get<Note>(`${this.noteUrl}/${id}/${key}`);
+    return this.http.get<Note>(`${this.noteUrl}/${id}/keys/${key}`);
   }
 
   public save(noteRequest: NoteRequest): Observable<NoteResponse> {
