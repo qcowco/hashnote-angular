@@ -41,6 +41,6 @@ export class ResultDialogComponent implements OnInit {
   }
 
   private setUrl() {
-    this.url = 'http://localhost:4200/' + this.id + '/' + this.key;
+    this.url = window.location.origin + '/' + this.noteResponse.noteId + '/' + this.noteResponse.secretKey;
   }
 }
