@@ -2,8 +2,8 @@ export class Note {
   public id: string;
   public name: string;
   public message?: string;
-  public createdAt?: Date;
-  public expiresAt?: Date;
+  public createdAt?: string;
+  public expiresAt?: string;
   public keyVisits?: number;
   public maxVisits?: number;
 
