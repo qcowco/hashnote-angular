@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Note} from '../../model/note/note';
 import {SecurityService} from '../../service/security-service/security.service';
 import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-folder-dialog',
@@ -12,30 +13,38 @@ import {Router} from '@angular/router';
   styleUrls: ['./folder-dialog.component.css']
 })
 export class FolderDialogComponent implements OnInit {
-  private folderName = '';
-  private updateFolderName = '';
   private updating = false;
   private updatedFolderId: string;
+  folderForm: FormGroup;
+  updateFolderForm: FormGroup;
 
   folders: Folder[];
 
   constructor(private dialogRef: MatDialogRef<FolderDialogComponent>, private folderService: FolderService,
-              private securityService: SecurityService, @Optional() @Inject(MAT_DIALOG_DATA) private note: Note, private router: Router ) {
-    console.log(note);
+              private securityService: SecurityService, @Optional() @Inject(MAT_DIALOG_DATA) private note: Note, private router: Router,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
+    this.folderForm = this.formBuilder.group({
+      folderName: ['', [Validators.required, Validators.maxLength(32)]]
+      }
+    );
+
+    this.updateFolderForm = this.formBuilder.group({
+      folderName: ['', [Validators.required, Validators.maxLength(32)]]
+    });
+
     this.folderService.findAll().subscribe(data => {
-      console.log(data);
       this.folders = data;
     });
   }
 
   saveFolder() {
-    const saveName = this.folderName;
-    this.folderName = '';
+    const saveName = this.folderForm.controls.folderName.value;
+    this.folderForm.controls.folderName.reset();
     this.folderService.save(saveName).subscribe(data => {
-      let folder = { id: data.folderId, name: saveName, author: this.securityService.getLoggedUser(), notes: []};
+      const folder = { id: data.folderId, name: saveName, author: this.securityService.getLoggedUser(), notes: []};
       this.folders.push(folder);
     });
   }
@@ -50,19 +59,23 @@ export class FolderDialogComponent implements OnInit {
   saveNoteToFolder(folderId: string) {
     this.folderService.saveNoteToFolder(folderId, this.note.id).subscribe( data => {
       const folder = this.folders.find(e => e.id === folderId);
-      folder.notes.push({ id: this.note.id, name: this.note.name, createdAt: this.note.createdAt, expiresAt: this.note.expiresAt });
+      folder.notes.push({
+        id: this.note.id,
+        name: this.note.name,
+        createdAt: this.note.createdAt,
+        expiresAt: this.note.expiresAt,
+        keyVisits: this.note.keyVisits,
+        maxVisits: this.note.maxVisits
+      });
     });
   }
 
   removeNoteFromFolder(folderId: string, noteId: string) {
     this.folderService.removeNoteFromFolder(folderId, noteId).subscribe( data => {
       const folder = this.folders.find(e => e.id === folderId);
-      folder.notes.splice(0, 1);
+      const index = folder.notes.findIndex(note => note.id === noteId);
+      folder.notes.splice(index, 1);
     });
-  }
-
-  isAddFolderValid() {
-    return this.isFolderNameValid(this.folderName);
   }
 
   redirectToNote(id: string) {
@@ -71,20 +84,11 @@ export class FolderDialogComponent implements OnInit {
   }
 
   updateFolder() {
-    const updatedName = this.updateFolderName;
-    this.updateFolderName = '';
+    const updatedName = this.updateFolderForm.controls.folderName.value;
     this.folderService.update(this.updatedFolderId, updatedName).subscribe(data => {
       this.folders.find(folder => folder.id === this.updatedFolderId).name = updatedName;
     });
     this.updating = false;
-  }
-
-  isUpdateFolderValid() {
-    return this.isFolderNameValid(this.updateFolderName);
-  }
-
-  isFolderNameValid(name: string) {
-    return name.length >= 3 && name.length < 32 && name;
   }
 
   findUpdatedFolderName() {
@@ -121,28 +125,28 @@ export class FolderDialogComponent implements OnInit {
     return (note.expiresAt != null);
   }
 
-  timeSince(date: Date) {
+  timeSince(date: string) {
     const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
 
     let interval = Math.floor(seconds / 31536000);
 
-    if (interval > 1) {
+    if (interval >= 1) {
       return interval + ' years ago';
     }
     interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
+    if (interval >= 1) {
       return interval + ' months ago';
     }
     interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
+    if (interval >= 1) {
       return interval + ' days ago';
     }
     interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
+    if (interval >= 1) {
       return interval + ' hours ago';
     }
     interval = Math.floor(seconds / 60);
-    if (interval > 1) {
+    if (interval >= 1) {
       return interval + ' minutes ago';
     }
     return Math.floor(seconds) + ' seconds ago';

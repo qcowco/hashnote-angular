@@ -26,50 +26,64 @@
         <div class="notes" *ngIf="isHidden">
 <!--            NOTE-->
           <div class="note-headers">
-            <p>Name</p>
-            <p>Created at</p>
-            <p>Expires in</p>
-            <p>Unlocks</p>
-            <p>Max</p>
+            <p class="header-note-name">Name</p>
+            <p class="header-note-creation">Created</p>
+            <p class="header-note-expiration">Expires</p>
+            <p class="header-note-visits">Unlocks</p>
+            <p class="header-note-max-visits">Max</p>
           </div>
-            <div class="note" *ngFor="let note of folder.notes; let noteHidden = false">
-              <p>{{note.name}}</p>
-              <p [matTooltip]="getDateTime(note)">{{timeSince(note.createdAt)}}</p>
-              <p [innerText]="getExpiration(note)"></p>
-              <p [innerText]="note.keyVisits"></p>
-              <p [innerText]="note.maxVisits || 'infinite'"></p>
+            <div class="note" *ngFor="let note of folder.notes; let infoVisible = false">
+              <p class="info-note-name">{{note.name}}</p>
+              <p class="info-note-creation" [matTooltip]="getDateTime(note)">{{timeSince(note.createdAt)}}</p>
+              <p class="info-note-expiration" [innerText]="getExpiration(note)"></p>
+              <p class="info-note-visits" [innerText]="note.keyVisits"></p>
+              <p class="info-note-max-visits" [innerText]="note.maxVisits || 'infinite'"></p>
 <!--              NOTE BUTTONS-->
               <div class="note-menu">
+                <button id="info-button" mat-icon-button (click)="infoVisible = !infoVisible">
+                  <i class="fa fa-info-circle"></i>
+                </button>
                 <button mat-icon-button (click)="redirectToNote(note.id)">
                   <i class="fa fa-external-link"></i>
                 </button>
-                <button mat-icon-button (click)="removeNoteFromFolder(folder.id, note.id); noteHidden = true">
+                <button mat-icon-button (click)="removeNoteFromFolder(folder.id, note.id)">
                   <i class="fa fa-trash"></i>
                 </button>
+              </div>
+              <div class="note-info" *ngIf="infoVisible">
+                <span>
+                  <b>Created:</b> {{note.createdAt}}
+                </span>
+                <span>
+                  <b>Expires:</b> {{note.expiresAt || 'never'}} <span *ngIf="note.expiresAt"> - {{getExpiration(note)}}</span>
+                </span>
+                <span>
+                  <b>Unlocked:</b> {{note.keyVisits}} times<span *ngIf="note.maxVisits > 0"> out of {{note.maxVisits}}</span>
+                </span>
               </div>
             </div>
         </div>
       </div>
     </div>
-  <div class="folder-create-container" *ngIf="!updating">
+  <div class="folder-create-container" [formGroup]="folderForm" *ngIf="!updating">
     <mat-form-field>
       <mat-label>Folder name</mat-label>
-      <input matInput [(ngModel)]="folderName">
+      <input matInput formControlName="folderName">
     </mat-form-field>
     <button mat-raised-button (click)="saveFolder()"
-            [disabled]="!isAddFolderValid()">Save folder</button>
+            [disabled]="!folderForm.valid">Save folder</button>
   </div>
 
-  <div class="folder-update-container" *ngIf="updating">
+  <div class="folder-update-container" [formGroup]="updateFolderForm" *ngIf="updating">
     <mat-form-field>
-      <input matInput [(ngModel)]="updateFolderName"
-             [placeholder]="findUpdatedFolderName()">
+      <mat-label>Folder name</mat-label>
+      <input matInput [placeholder]="findUpdatedFolderName()" formControlName="folderName">
     </mat-form-field>
     <div class="update-buttons">
       <button mat-raised-button (click)="cancelUpdate()">Cancel</button>
       <div id="separator"></div>
       <button mat-raised-button (click)="updateFolder()"
-              [disabled]="!isUpdateFolderValid()">Update</button>
+              [disabled]="!updateFolderForm.valid">Update</button>
     </div>
   </div>
 </mat-dialog-content>

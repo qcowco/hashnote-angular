@@ -46,12 +46,16 @@ mat-dialog-content {
   margin-left: 20px;
   padding-left: 15px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 80px 80px 80px;
+  grid-template-columns: auto 120px 120px 75px 65px 80px;
   grid-gap: 8px;
 }
 
 .note {
   align-items: center;
+}
+
+.note p {
+  min-inline-size: max-content;
 }
 
 .note-headers {
@@ -70,4 +74,38 @@ mat-dialog-content {
 
 .fa-edit {
   line-height: 43px;
+}
+
+#info-button {
+  display: none;
+}
+
+.note-info {
+  display: grid;
+  grid-template-columns: initial;
+  grid-template-rows: auto auto auto;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .note, .note-headers {
+    grid-template-columns: auto 1px 1px 1px 1px 120px;
+  }
+
+  .info-note-creation, .info-note-expiration, .info-note-visits, .info-note-max-visits {
+    visibility: hidden;
+  }
+
+  .header-note-creation, .header-note-expiration, .header-note-visits, .header-note-max-visits {
+    visibility: hidden;
+  }
+
+  .note p {
+    overflow: hidden;
+  }
+
+  #info-button {
+    display: initial;
+  }
+
 }
