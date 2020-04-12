@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {MAT_DIALOG_DATA} from '@angular/material/';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-options-dialog',
@@ -8,26 +9,34 @@ import {MAT_DIALOG_DATA} from '@angular/material/';
   styleUrls: ['./options-dialog.component.css']
 })
 export class OptionsDialogComponent implements OnInit {
-  private name: string;
   private methodSelection: Method;
   private methods: Method[];
   private selfDestruct = false;
   private destructionSelection: Time;
   private destructionTimes: Time[];
-  private visits: number;
+  nameForm: FormGroup;
+  visitForm: FormGroup;
 
-  constructor(public dialog: MatDialogRef<OptionsDialogComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public defaultValues) {
-    this.name = defaultValues.name;
-    this.methodSelection = defaultValues.method;
+  constructor(public dialog: MatDialogRef<OptionsDialogComponent>, @Optional() @Inject(MAT_DIALOG_DATA) public defaultValues,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
+    this.nameForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(32)]]
+    });
+
+    this.visitForm = this.formBuilder.group({
+      visits: ['', [Validators.pattern('([1-9]+[0-9]*)')]]
+    });
+
     this.methods = [
       { name: 'AES', description: 'AES encryption with a 256-bit symmetric key'},
       { name: 'DESede', description: '3DES encryption with a 168-bit symmetric key'},
       { name: 'DES', description: 'DES encryption with a 56-bit symmetric key'}
     ];
     this.methodSelection = this.methods[0];
+
     this.destructionTimes = [
       { name: 'None', value: 0 },
       { name: '1 minute', value: 1 },
@@ -40,10 +49,20 @@ export class OptionsDialogComponent implements OnInit {
       { name: '24 hours', value: 1440 }
     ];
     this.destructionSelection = this.destructionTimes[0];
+
+    this.nameForm.controls.name.setValue(this.defaultValues.name);
+    this.methodSelection = this.methods.find(method => method.name === this.defaultValues.method);
+    this.destructionSelection = this.destructionTimes.find(time => time.value === this.defaultValues.destruction);
+    this.visitForm.controls.visits.setValue(this.defaultValues.visits);
   }
 
   public confirmSelection() {
-    this.dialog.close({ name: this.name, method: this.methodSelection.name, destruction: this.getDestructionTime(), visits: this.visits });
+    this.dialog.close({
+      name: this.nameForm.controls.name.value,
+      method: this.methodSelection.name,
+      destruction: this.getDestructionTime(),
+      visits: this.getMaxVisits()
+    });
   }
 
   getDestructionTime() {
@@ -51,6 +70,14 @@ export class OptionsDialogComponent implements OnInit {
       return this.destructionSelection.value;
     } else {
       return null;
+    }
+  }
+
+  getMaxVisits() {
+    if (this.selfDestruct) {
+      return this.visitForm.controls.visits.value;
+    } else {
+      return 0;
     }
   }
 

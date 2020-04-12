@@ -1,7 +1,7 @@
 <div class="mat-form-container">
-  <mat-form-field>
+  <mat-form-field [formGroup]="nameForm">
     <mat-label>Note name</mat-label>
-    <input matInput #input maxlength="32" [(ngModel)]="name">
+    <input matInput #input maxlength="32" formControlName="name">
     <mat-hint align="end">{{input.value?.length || 0}}/32</mat-hint>
   </mat-form-field>
   <mat-form-field>
@@ -21,13 +21,13 @@
       <mat-option *ngFor="let time of destructionTimes" [value]="time">{{time.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field *ngIf="selfDestruct" >
+  <mat-form-field *ngIf="selfDestruct" [formGroup]="visitForm">
     <mat-label>Max visits</mat-label>
-    <input matInput type="number" [(ngModel)]="visits" maxlength="5">
+    <input matInput type="number" formControlName="visits">
   </mat-form-field>
 
   <mat-dialog-actions>
-    <button mat-button (click)="confirmSelection()" color="primary">Confirm</button>
+    <button mat-button (click)="confirmSelection()" color="primary" [disabled]="nameForm.invalid || (visitForm.invalid && selfDestruct)">Confirm</button>
     <button mat-button (click)="this.dialog.close()">Cancel</button>
   </mat-dialog-actions>
 </div>
