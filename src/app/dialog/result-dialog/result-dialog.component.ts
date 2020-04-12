@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import {EncryptionCredentials} from '../../model/encryption-credentials/encryption-credentials';
+import {NoteResponse} from '../../model/note-response/note-response';
 
 @Component({
   selector: 'app-result-dialog',
@@ -8,25 +8,18 @@ import {EncryptionCredentials} from '../../model/encryption-credentials/encrypti
   styleUrls: ['./result-dialog.component.css']
 })
 export class ResultDialogComponent implements OnInit {
-  private id: string;
-  private key: string;
   private url: string;
 
-  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public encryptionCredentials: EncryptionCredentials) {
+  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public noteResponse: NoteResponse) {
   }
 
   ngOnInit() {
-    this.applyCredentials();
     this.setUrl();
   }
 
-  private applyCredentials() {
-    this.id = this.encryptionCredentials.getId();
-    this.key = this.encryptionCredentials.getKey();
-  }
 
   onClickKey() {
-    this.clipboardCopy(this.key);
+    this.clipboardCopy(this.noteResponse.secretKey);
   }
 
   onClickUrl() {
