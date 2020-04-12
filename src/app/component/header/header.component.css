@@ -67,7 +67,12 @@ a {
     left: initial;
   }
 
+  .left-side {
+    width: 30%;
+  }
+
   .right-side {
+    width: 70%;
     border-left: initial;
   }
 
@@ -77,8 +82,7 @@ a {
   }
 
   .note-name {
-    position: fixed;
-    right: 2%;
+    float: right;
   }
 
   .separator {
