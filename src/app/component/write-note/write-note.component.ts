@@ -5,9 +5,9 @@ import {ActivatedRoute} from '@angular/router';
 import {NoteService} from '../../service/note-service/note.service';
 import {MatDialog} from '@angular/material';
 import {ResultDialogComponent} from '../../dialog/result-dialog/result-dialog.component';
-import {EncryptionCredentials} from '../../model/encryption-credentials/encryption-credentials';
 import {OptionsDialogComponent} from '../../dialog/options-dialog/options-dialog.component';
 import {SharedNoteService} from '../../service/shared-note/shared-note.service';
+import {NoteResponse} from '../../model/note-response/note-response';
 
 @Component({
   selector: 'app-write-note',
@@ -31,7 +31,7 @@ export class WriteNoteComponent implements OnInit {
   private createdNoteRequest: NoteRequest;
 
   private receivedEncryptedNote: Note;
-  private receivedEncryptionCredentials: EncryptionCredentials;
+  private receivedNoteResponse: NoteResponse;
 
   constructor(private route: ActivatedRoute, private noteService: NoteService, private dialog: MatDialog,
               private sharedNote: SharedNoteService) { }
@@ -62,7 +62,8 @@ export class WriteNoteComponent implements OnInit {
     this.createNoteRequest();
 
     this.noteService.save(this.createdNoteRequest).subscribe(data => {
-        this.receivedEncryptionCredentials = new EncryptionCredentials(data);
+        this.receivedNoteResponse = data;
+        console.log(this.receivedNoteResponse);
 
         this.showEncryptionResult();
 
@@ -85,10 +86,9 @@ export class WriteNoteComponent implements OnInit {
   }
 
   public getEncryptedNote() {
-    return this.noteService.find(this.receivedEncryptionCredentials.getId()).subscribe(data => {
+    return this.noteService.find(this.receivedNoteResponse.noteId).subscribe(data => {
         this.receivedEncryptedNote = data;
         this.sharedNote.emitChange(data);
-        console.log(data);
         // todo oddzielic emit
       },
       error => {
@@ -126,7 +126,7 @@ export class WriteNoteComponent implements OnInit {
   }
 
   private showEncryptionResult() {
-    this.dialog.open(ResultDialogComponent, { width: '950px', height: '140px', data: this.receivedEncryptionCredentials });
+    this.dialog.open(ResultDialogComponent, { width: '950px', height: '140px', data: this.receivedNoteResponse });
   }
 
   public tryGetEncryptedMessage() {
