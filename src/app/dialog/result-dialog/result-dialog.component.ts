@@ -8,7 +8,7 @@ import {NoteResponse} from '../../model/note-response/note-response';
   styleUrls: ['./result-dialog.component.css']
 })
 export class ResultDialogComponent implements OnInit {
-  private url: string;
+  url: string;
 
   constructor(@Optional() @Inject(MAT_DIALOG_DATA) public noteResponse: NoteResponse) {
   }

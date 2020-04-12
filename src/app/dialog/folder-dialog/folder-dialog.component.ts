@@ -13,8 +13,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./folder-dialog.component.css']
 })
 export class FolderDialogComponent implements OnInit {
-  private updating = false;
-  private updatedFolderId: string;
+  updating = false;
+  updatedFolderId: string;
   folderForm: FormGroup;
   updateFolderForm: FormGroup;
 

@@ -7,7 +7,7 @@ import {MatDialogRef} from '@angular/material';
   styleUrls: ['./key-dialog.component.css']
 })
 export class KeyDialogComponent implements OnInit {
-  private key: string;
+  key: string;
 
   constructor(private dialogRef: MatDialogRef<KeyDialogComponent>) { }
 
@@ -16,5 +16,9 @@ export class KeyDialogComponent implements OnInit {
 
   confirm() {
     this.dialogRef.close(this.key);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

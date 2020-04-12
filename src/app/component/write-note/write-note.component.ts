@@ -15,23 +15,23 @@ import {NoteResponse} from '../../model/note-response/note-response';
   styleUrls: ['./write-note.component.css']
 })
 export class WriteNoteComponent implements OnInit {
-  private placeholderMessage = '';
-  private textareaInput: string;
-  private errorMessage: string;
+  placeholderMessage = '';
+  textareaInput: string;
+  errorMessage: string;
 
-  private method = 'AES';
-  private noteName: string;
-  private destructionTime: number;
-  private visits: number;
+  method = 'AES';
+  noteName: string;
+  destructionTime: number;
+  visits: number;
 
-  private errorOccured = false;
-  private isEncrypting = false;
+  errorOccured = false;
+  isEncrypting = false;
 
-  private createdNote: Note;
-  private createdNoteRequest: NoteRequest;
+  createdNote: Note;
+  createdNoteRequest: NoteRequest;
 
-  private receivedEncryptedNote: Note;
-  private receivedNoteResponse: NoteResponse;
+  receivedEncryptedNote: Note;
+  receivedNoteResponse: NoteResponse;
 
   constructor(private route: ActivatedRoute, private noteService: NoteService, private dialog: MatDialog,
               private sharedNote: SharedNoteService) { }

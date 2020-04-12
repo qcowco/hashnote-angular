@@ -9,11 +9,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./options-dialog.component.css']
 })
 export class OptionsDialogComponent implements OnInit {
-  private methodSelection: Method;
-  private methods: Method[];
-  private selfDestruct = false;
-  private destructionSelection: Time;
-  private destructionTimes: Time[];
+  methodSelection: Method;
+  methods: Method[];
+  selfDestruct = false;
+  destructionSelection: Time;
+  destructionTimes: Time[];
   nameForm: FormGroup;
   visitForm: FormGroup;
 

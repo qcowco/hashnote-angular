@@ -4,13 +4,13 @@
   </div>
   <div class="right-side">
     <div class="app-menu">
-      <span (click)="openFolderDialog()" *ngIf="securityService.isLogged()">Folders
+      <span (click)="openFolderDialog()" *ngIf="isUserLogged()">Folders
         <i class="fa fa-folder-open"></i>
       </span>
-      <span (click)="openUserDialog()" *ngIf="!securityService.isLogged()">Sign in
+      <span (click)="openUserDialog()" *ngIf="!isUserLogged()">Sign in
         <i class="fa fa-user"></i>
       </span>
-      <span (click)="securityService.logout()" *ngIf="securityService.isLogged()">Sign out {{securityService.getLoggedUser()}}
+      <span (click)="securityService.logout()" *ngIf="isUserLogged()">Sign out {{securityService.getLoggedUser()}}
         <i class="fa fa-sign-out"></i>
       </span>
     </div>

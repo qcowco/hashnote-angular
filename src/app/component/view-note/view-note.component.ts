@@ -12,18 +12,18 @@ import {SharedNoteService} from '../../service/shared-note/shared-note.service';
   styleUrls: ['./view-note.component.css']
 })
 export class ViewNoteComponent implements OnInit {
-  private placeholderMessage = '';
+  placeholderMessage = '';
 
-  private originalNote: Note;
-  private decryptedNote: Note;
+  originalNote: Note;
+  decryptedNote: Note;
 
-  private errorMessage: string;
-  private errorOccured = false;
+  errorMessage: string;
+  errorOccured = false;
 
-  private isDecrypting = false;
+  isDecrypting = false;
 
-  private id: string;
-  private key: string;
+  id: string;
+  key: string;
 
 
   constructor(private route: ActivatedRoute, private noteService: NoteService, private dialog: MatDialog,
@@ -79,7 +79,7 @@ export class ViewNoteComponent implements OnInit {
 
   public decryptWithDialog() {
     this.openKeyDialog().then(data => {
-      if(data != null) {
+      if (data != null) {
         this.key = data;
         this.getDecryptedNote();
       }

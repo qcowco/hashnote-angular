@@ -19,7 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
-  private login = true;
+  login = true;
   loginForm: FormGroup;
   registerForm: FormGroup;
   matcher = new MyErrorStateMatcher();

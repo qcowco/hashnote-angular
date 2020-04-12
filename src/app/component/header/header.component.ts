@@ -12,8 +12,8 @@ import {FolderDialogComponent} from '../../dialog/folder-dialog/folder-dialog.co
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  private emittedNote: Note;
-  private username: string;
+  emittedNote: Note;
+  username: string;
 
   constructor(private sharedNote: SharedNoteService, private securityService: SecurityService, private dialog: MatDialog) {
     sharedNote.changeEmmited.subscribe(note => this.emittedNote = note);
@@ -41,4 +41,7 @@ export class HeaderComponent implements OnInit {
       .afterClosed().toPromise();
   }
 
+  isUserLogged() {
+    return this.securityService.isLogged();
+  }
 }
