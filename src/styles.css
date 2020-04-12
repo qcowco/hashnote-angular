@@ -57,7 +57,49 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-right: 2px;
 }
 
-#circle-cog > button:disabled {
+#circle-user {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: grey;
+  left: 82%;
+  top: 51%;
+  position: absolute;
+  border: solid 2px;
+}
+
+#circle-user > button {
+  height: 100%;
+  width: 100%;
+  font-size: 1.8em;
+  outline: none;
+  color: white;
+  padding-bottom: 3px;
+  padding-right: 2px;
+}
+
+#circle-folder {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background: grey;
+  left: 81%;
+  top: 18%;
+  position: absolute;
+  border: solid 2px;
+}
+
+#circle-folder > button {
+  height: 100%;
+  width: 100%;
+  font-size: 1.8em;
+  outline: none;
+  color: white;
+  padding-bottom: 3px;
+  padding-right: 2px;
+}
+
+#circle-cog > button:disabled, #circle-folder > button:disabled {
   color: #b7b7b7;
 }
 
@@ -67,6 +109,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .fa-times {
   vertical-align: unset !important;
+}
+
+.fa-folder-open {
+  margin: 3px 0px 0 5px;
 }
 
 @media (max-width: 768px) {
