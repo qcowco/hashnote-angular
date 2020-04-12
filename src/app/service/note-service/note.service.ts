@@ -4,6 +4,7 @@ import {Note} from '../../model/note/note';
 import {Observable} from 'rxjs';
 import {NoteRequest} from '../../model/note-request/note-request';
 import {environment} from '../../../environments/environment';
+import {NoteResponse} from '../../model/note-response/note-response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class NoteService {
     return this.http.get<Note>(`${this.noteUrl}/${id}/${key}`);
   }
 
-  public save(noteRequest: NoteRequest): Observable<string> {
-    return this.http.post(this.noteUrl, noteRequest, { responseType: 'text' });
+  public save(noteRequest: NoteRequest): Observable<NoteResponse> {
+    return this.http.post<NoteResponse>(this.noteUrl, noteRequest);
   }
 }
