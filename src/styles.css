@@ -153,4 +153,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .fa-unlock-alt, .fa-lock, .fa-times {
     font-size: 50px;
   }
+
+  .fa-times {
+    vertical-align: middle !important;
+    line-height: initial !important;
+  }
+
 }
