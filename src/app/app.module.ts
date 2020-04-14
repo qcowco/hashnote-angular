@@ -26,6 +26,7 @@ import {JwtModule} from '@auth0/angular-jwt';
 import { UserDialogComponent } from './dialog/user-dialog/user-dialog.component';
 import {AuthInterceptorService} from './security/auth-interceptor/auth-interceptor.service';
 import {FolderDialogComponent} from './dialog/folder-dialog/folder-dialog.component';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import {FolderDialogComponent} from './dialog/folder-dialog/folder-dialog.compon
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:8080']
+        whitelistedDomains: [environment.domain]
       }
     }),
     ReactiveFormsModule,
