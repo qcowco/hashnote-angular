@@ -117,6 +117,8 @@ export class FolderDialogComponent implements OnInit {
         result = Math.ceil(seconds / 60) + ' minutes';
       } else if (seconds >= 0) {
         result = Math.ceil(seconds) + ' seconds';
+      } else {
+        result = 'expired';
       }
     }
     return result;
