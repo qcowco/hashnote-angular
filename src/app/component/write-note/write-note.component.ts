@@ -40,8 +40,6 @@ export class WriteNoteComponent implements OnInit {
   }
 
   public encryptTextarea() {
-    this.isEncrypting = true;
-
     if (!this.isTextareaEmpty()) {
       if (this.method != null && this.noteName != null) {
         this.encryptNote();
@@ -49,8 +47,6 @@ export class WriteNoteComponent implements OnInit {
         this.encryptWithDialog();
       }
     }
-
-    this.isEncrypting = false;
   }
 
   public isTextareaEmpty() {
@@ -58,6 +54,8 @@ export class WriteNoteComponent implements OnInit {
   }
 
   public encryptNote() {
+    this.isEncrypting = true;
+
     this.createNoteFromTextarea();
     this.createNoteRequest();
 
