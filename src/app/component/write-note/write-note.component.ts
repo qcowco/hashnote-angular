@@ -56,12 +56,11 @@ export class WriteNoteComponent implements OnInit {
   public encryptNote() {
     this.isEncrypting = true;
 
-    this.createNoteFromTextarea();
+    this.createNote();
     this.createNoteRequest();
 
     this.noteService.save(this.createdNoteRequest).subscribe(data => {
         this.receivedNoteResponse = data;
-        console.log(this.receivedNoteResponse);
 
         this.showEncryptionResult();
 
@@ -75,12 +74,16 @@ export class WriteNoteComponent implements OnInit {
       });
   }
 
-  public createNoteFromTextarea() {
+  public createNote() {
     this.createdNote = new Note(this.noteName, this.textareaInput);
+
+    if (this.visits !== 0) {
+      this.createdNote.maxVisits = this.visits;
+    }
   }
 
   public createNoteRequest() {
-    this.createdNoteRequest = new NoteRequest(this.createdNote, this.method, this.destructionTime, this.visits);
+    this.createdNoteRequest = new NoteRequest(this.createdNote, this.method, this.destructionTime);
   }
 
   public getEncryptedNote() {
