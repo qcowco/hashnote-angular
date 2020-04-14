@@ -16,6 +16,7 @@ export class ViewNoteComponent implements OnInit {
 
   originalNote: Note;
   decryptedNote: Note;
+  decryptedHidden: boolean;
 
   errorMessage: string;
   errorOccured = false;
@@ -110,9 +111,7 @@ export class ViewNoteComponent implements OnInit {
   }
 
   private handleError(error: any) {
-    if (error.status === 404) {
-      this.setErrorMessage('Error: Note doesnt exist.');
-    } else if (error.status === 0) {
+   if (error.status === 0) {
       this.setErrorMessage('Error: Unable to establish a connection with the API server.');
     } else if (error.status === 400) {
       this.setErrorMessage('Error: Wrong key.');
@@ -136,15 +135,23 @@ export class ViewNoteComponent implements OnInit {
     return this.decryptedNote != null;
   }
 
-  public hideContent() {
-    this.decryptedNote = null;
+  public hideDecrypted() {
+    this.decryptedHidden = true;
+  }
+
+  public showDecrypted() {
+    this.decryptedHidden = false;
+  }
+
+  public shouldShowDecrypted() {
+    return !this.decryptedHidden && this.isNoteDecrypted();
   }
 
   public tryGetMessage() {
     if (this.errorOccured) {
       return this.errorMessage;
     }
-    if (this.decryptedNote != null) {
+    if (this.decryptedNote != null && !this.decryptedHidden) {
       return this.decryptedNote.message;
     }
     if (this.originalNote != null) {
