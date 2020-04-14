@@ -50,10 +50,41 @@ export class OptionsDialogComponent implements OnInit {
     ];
     this.destructionSelection = this.destructionTimes[0];
 
-    this.nameForm.controls.name.setValue(this.defaultValues.name);
-    this.methodSelection = this.methods.find(method => method.name === this.defaultValues.method);
-    this.destructionSelection = this.destructionTimes.find(time => time.value === this.defaultValues.destruction);
-    this.visitForm.controls.visits.setValue(this.defaultValues.visits);
+    this.applyDefaultValuesWhenPossible();
+  }
+
+  private applyDefaultValuesWhenPossible() {
+    this.setDefaultName();
+
+    this.setDefaultMethod();
+
+    this.setDefaultDestructionTime();
+
+    this.setDefaultMaxVisits();
+  }
+
+  private setDefaultName() {
+    if (this.defaultValues.name) {
+      this.nameForm.controls.name.setValue(this.defaultValues.name);
+    }
+  }
+
+  private setDefaultMethod() {
+    if (this.defaultValues.method) {
+      this.methodSelection = this.methods.find(method => method.name === this.defaultValues.method);
+    }
+  }
+
+  private setDefaultDestructionTime() {
+    if (this.defaultValues.destruction != null && this.defaultValues.destruction >= 0) {
+      this.destructionSelection = this.destructionTimes.find(time => time.value === this.defaultValues.destruction);
+    }
+  }
+
+  private setDefaultMaxVisits() {
+    if (this.defaultValues.visits > 0) {
+      this.visitForm.controls.visits.setValue(this.defaultValues.visits);
+    }
   }
 
   public confirmSelection() {
