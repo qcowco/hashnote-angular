@@ -115,7 +115,7 @@ export class FolderDialogComponent implements OnInit {
       const seconds = this.getRemainingSeconds(note);
       if (seconds > 60) {
         result = Math.ceil(seconds / 60) + ' minutes';
-      } else {
+      } else if (seconds >= 0) {
         result = Math.ceil(seconds) + ' seconds';
       }
     }
