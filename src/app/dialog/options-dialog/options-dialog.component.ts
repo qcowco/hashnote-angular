@@ -30,27 +30,35 @@ export class OptionsDialogComponent implements OnInit {
       visits: ['', [Validators.pattern('([1-9]+[0-9]*)')]]
     });
 
-    this.methods = [
-      { name: 'AES', description: 'AES encryption with a 256-bit symmetric key'},
-      { name: 'DESede', description: '3DES encryption with a 168-bit symmetric key'},
-      { name: 'DES', description: 'DES encryption with a 56-bit symmetric key'}
-    ];
+    this.initMethodTable();
     this.methodSelection = this.methods[0];
 
-    this.destructionTimes = [
-      { name: 'None', value: 0 },
-      { name: '1 minute', value: 1 },
-      { name: '2 minutes', value: 2 },
-      { name: '5 minutes', value: 5 },
-      { name: '10 minutes', value: 10 },
-      { name: '30 minutes', value: 30 },
-      { name: '1 hour', value: 60 },
-      { name: '6 hours', value: 360 },
-      { name: '24 hours', value: 1440 }
-    ];
+    this.initDestructionTable();
     this.destructionSelection = this.destructionTimes[0];
 
     this.applyDefaultValuesWhenPossible();
+  }
+
+  private initMethodTable() {
+    this.methods = [
+      {name: 'AES', description: 'AES encryption with a 256-bit symmetric key'},
+      {name: 'DESede', description: '3DES encryption with a 168-bit symmetric key'},
+      {name: 'DES', description: 'DES encryption with a 56-bit symmetric key'}
+    ];
+  }
+
+  private initDestructionTable() {
+    this.destructionTimes = [
+      {name: 'None', value: 0},
+      {name: '1 minute', value: 1},
+      {name: '2 minutes', value: 2},
+      {name: '5 minutes', value: 5},
+      {name: '10 minutes', value: 10},
+      {name: '30 minutes', value: 30},
+      {name: '1 hour', value: 60},
+      {name: '6 hours', value: 360},
+      {name: '24 hours', value: 1440}
+    ];
   }
 
   private applyDefaultValuesWhenPossible() {
