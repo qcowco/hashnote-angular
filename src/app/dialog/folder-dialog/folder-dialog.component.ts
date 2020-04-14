@@ -15,7 +15,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class FolderDialogComponent implements OnInit {
   updating = false;
   updatedFolderId: string;
+  updatedFolderOldName: string;
   folderForm: FormGroup;
+
   updateFolderForm: FormGroup;
 
   folders: Folder[];
@@ -83,12 +85,20 @@ export class FolderDialogComponent implements OnInit {
     this.router.navigateByUrl(`${id}`);
   }
 
-  updateFolder() {
+  confirmUpdate() {
     const updatedName = this.updateFolderForm.controls.folderName.value;
-    this.folderService.update(this.updatedFolderId, updatedName).subscribe(data => {
+
+    if (updatedName !== this.updatedFolderOldName) {
+      this.updateFolder(this.updatedFolderId, updatedName);
+    }
+
+    this.updating = false;
+  }
+
+  private updateFolder(folderId: string, updatedName: string) {
+    this.folderService.update(folderId, updatedName).subscribe(data => {
       this.folders.find(folder => folder.id === this.updatedFolderId).name = updatedName;
     });
-    this.updating = false;
   }
 
   findUpdatedFolderName() {
@@ -153,4 +163,12 @@ export class FolderDialogComponent implements OnInit {
 
   }
 
+  setUpdate(folder: Folder) {
+    this.updating = true;
+
+    this.updatedFolderId = folder.id;
+    this.updatedFolderOldName = folder.name;
+
+    this.updateFolderForm.controls.folderName.setValue(folder.name);
+  }
 }
